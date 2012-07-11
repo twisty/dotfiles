@@ -1,0 +1,42 @@
+" This file is loaded by Janus
+" http://github.com/carlhuda/janus/
+
+" Use solarized theme
+" http://ethanschoonover.com/solarized
+let g:solarized_termcolors=256
+set t_Co=16
+set background=light
+colorscheme solarized
+
+" Use four spaces for tabs
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+
+" Use TextMate-style invisibles.
+set listchars=tab:▸\ ,eol:¬
+
+" Invisible character colors
+highlight NonText guifg=#eee8d5
+"highlight SpecialKey guifg=#eee8d5
+
+" http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
+set relativenumber
+
+" Hide MacVim toolbar
+:set go-=T
+
+" Set default window size.
+set lines=60 columns=120
+
+" Disable arrow keys!
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+nnoremap j gj
+nnoremap k gk
