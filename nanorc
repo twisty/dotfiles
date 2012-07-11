@@ -1,0 +1,44 @@
+set smooth
+set tabsize 4
+
+#
+# Colours for .nanorc
+#
+syntax "nanorc" "[\.]*nanorc$"
+color white "^ *(set|unset).*$"
+color cyan "^ *(set|unset) (autoindent|backup|const|cut|fill|keypad|multibuffer|noconvert|nofollow|nohelp|nowrap|operatingdir|preserve|quotestr|regexp|smooth|speller|suspend|tabsize|tempfile|historylog|view)"
+color brightwhite "^ *syntax [^ ]*"
+color brightblue "^ *set\>" "^ *unset\>" "^ *syntax\>"
+color white "^ *color\>.*"
+color yellow "^ *color (bright)?(white|black|red|blue|green|yellow|magenta|cyan)\>"
+color magenta "^ *color\>"
+color green "^#.*$"
+
+#
+# Colours for HTML
+#
+syntax "HTML" "\.html$"
+color blue start="<" end=">"
+color red "&[^; 	]*;"
+
+#
+# Colours for PHP
+#
+# Found this on the net for PHP:
+#     http://forums.gentoo.org/viewtopic.php?t=86562
+# via:
+#     http://osx.hyperjeff.net/MyApps/nanorc
+#
+syntax "php" ".*/*.php$"
+color brightwhite "\{|\}|\."
+color red "('[^']*')"
+color red "\"[^\"]*\""
+color cyan "(\$([[:alpha:]_]|->)*)"
+color brightgreen "((\$(([[:alpha:]_0-9])+\->)+)[[:alpha:]_0-9]+\()"
+color yellow " (if|else if|else|return|case|break)"
+color yellow "\|\||\?|!|\||&&|=|;|\(|\)"
+color red "false|true"
+color brightwhite "[[:space:]]+debug|[[:space:]]+echo|\$this\->debug"
+color magenta "//.*"
+color magenta start="/\*" end="\*/"
+
