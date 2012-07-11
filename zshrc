@@ -1,4 +1,3 @@
-export PATH=~/local/bin:~/Applications:/opt/local/bin:/opt/local/apache2/bin:$PATH;
 export MANPATH=$MANPATH:/usr/local/share/man:/opt/local/share/man;
 export INFOPATH=$INFOPATH:/opt/local/share/info;
 export NODE_PATH=$HOME/local/node:$HOME/local/node/lib/node_modules
