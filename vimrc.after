@@ -1,14 +1,21 @@
-" This file is loaded by Janus
+" This file is loaded by Janus.
 " http://github.com/carlhuda/janus/
 
-" Use solarized theme
+" https://github.com/nathanaelkane/vim-indent-guides
+let g:indent_guides_guide_size = 1
+
+" Highlight hex colours.
+" https://github.com/vim-scripts/hexHighlight.vim
+nnoremap <Leader>hh :call HexHighlight()<Return>
+
+" Use solarized theme.
 " http://ethanschoonover.com/solarized
 let g:solarized_termcolors=256
 set t_Co=16
 set background=light
 colorscheme solarized
 
-" Use four spaces for tabs
+" Use four spaces for tabs.
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -16,15 +23,18 @@ set softtabstop=4
 " Use TextMate-style invisibles.
 set listchars=tab:▸\ ,eol:¬
 
-" Invisible character colors
+" Invisible character colors.
 highlight NonText guifg=#eee8d5
 "highlight SpecialKey guifg=#eee8d5
 
 " http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
 set relativenumber
 
-" Hide MacVim toolbar
-:set go-=T
+" Hide MacVim toolbar.
+set go-=T
+
+" Set font.
+set guifont=Menlo\ Regular:h13
 
 " Set default window size.
 set lines=60 columns=120

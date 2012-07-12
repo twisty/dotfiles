@@ -1,0 +1,6 @@
+[submodule "janus/hexHighlight"]
+	path = janus/hexHighlight
+	url = https://github.com/vim-scripts/hexHighlight.vim.git
+[submodule "janus/vim-indent-guides"]
+	path = janus/vim-indent-guides
+	url = https://github.com/nathanaelkane/vim-indent-guides.git

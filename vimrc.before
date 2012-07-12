@@ -1,0 +1,2 @@
+" Remap leader key.
+let mapleader = ","
