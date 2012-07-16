@@ -15,6 +15,9 @@ set t_Co=16
 set background=light
 colorscheme solarized
 
+" Keep three lines visible above and below.
+set scrolloff=3         
+
 " Use four spaces for tabs.
 set tabstop=4
 set shiftwidth=4
