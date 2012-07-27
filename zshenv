@@ -1,2 +1,2 @@
-export PATH=~/local/bin:~/Applications:~/local/node/bin:/opt/local/bin:/opt/local/apache2/bin:$PATH;
+export PATH=~/local/bin:~/Applications:~/local/node/bin:/opt/local/bin:/opt/local/apache2/bin:/opt/local/sbin:$PATH;
 
