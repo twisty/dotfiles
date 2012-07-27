@@ -13,6 +13,11 @@ export VIM_APP_DIR=/Applications/MacVim
 export LC_CTYPE=en_US.UTF-8
 
 ##
+# http://www.techrepublic.com/blog/opensource/using-vi-key-bindings-in-bash-and-zsh/193
+#
+bindkey -v
+
+##
 # use 'dirs' to see the stack of past directories
 # use cd ~n to access stack
 #
