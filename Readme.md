@@ -15,7 +15,7 @@ To update:
 
 Vim config requires Janus, so [install Janus](https://github.com/carlhuda/janus#installation) first.
 
-Vim config requires some git submodules:
+Vim config also requires some git submodules, so:
 
     git submodule init
     git submodule update
