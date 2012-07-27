@@ -12,10 +12,10 @@ export VIM_APP_DIR=/Applications/MacVim
 
 export LC_CTYPE=en_US.UTF-8
 
-##
-# http://www.techrepublic.com/blog/opensource/using-vi-key-bindings-in-bash-and-zsh/193
-#
-bindkey -v
+# oh-my-zsh configuration.
+ZSH=$HOME/.oh-my-zsh
+plugins=(git osx vi-mode)
+source $ZSH/oh-my-zsh.sh
 
 ##
 # use 'dirs' to see the stack of past directories
