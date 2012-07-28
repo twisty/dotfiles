@@ -79,12 +79,6 @@ export GREP_COLOR='30;42'
 alias grep='grep --color'
 
 ##
-# Standard completions
-#
-autoload -U compinit
-compinit
-
-##
 # Complete ssh known hosts (from http://gentoo-wiki.com/TIP_Advanced_zsh_Completion)
 #
 local _myhosts
