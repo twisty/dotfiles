@@ -46,10 +46,15 @@ fg_no_colour=$'%{\e[0m%}'
 fg_white=$'%{\e[1;37m%}'
 fg_black=$'%{\e[0;30m%}'
 
+function prompt_char {
+    git branch >/dev/null 2>/dev/null && echo '±' && return
+    echo '○'
+}
+
 ##
 # prompt
 #
-PS1="${fg_green}%T ${fg_cyan}%m ${fg_yellow}%3~ ${fg_cyan}% %# ${fg_no_colour}"
+PROMPT='${fg_green}%T ${fg_cyan}%m ${fg_yellow}%3~ ${fg_cyan}% $(prompt_char) ${fg_no_colour}'
 
 ##
 # aliases
