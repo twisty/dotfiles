@@ -137,4 +137,4 @@ cat /usr/share/calendar/calendar* | grep ^`date +"%m/%d"`
 #           bit
 
 export CLICOLOR=1;
-export LSCOLORS=gxcxfxexdxxxxxxxxxxxxx;
+export LSCOLORS=gxcxfxexdxxxxxxxxxagag;
