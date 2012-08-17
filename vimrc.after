@@ -31,7 +31,9 @@ highlight NonText guifg=#eee8d5
 "highlight SpecialKey guifg=#eee8d5
 
 " http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
-set relativenumber
+if version >= 730 
+  set relativenumber
+endif
 
 " Hide MacVim toolbar.
 set go-=T
