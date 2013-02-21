@@ -1,6 +1,7 @@
+export PATH=$PATH
 export MANPATH=$MANPATH:/usr/local/share/man:/opt/local/share/man;
 export INFOPATH=$INFOPATH:/opt/local/share/info;
-export NODE_PATH=$HOME/local/node:$HOME/local/node/lib/node_modules
+export NODE_PATH=./node_modules:$HOME/local/node:$HOME/local/node/lib/node_modules
 
 export HISTSIZE=200
 export HISTFILE=~/.zsh_history
@@ -80,9 +81,6 @@ function svncdiff () {
     svn diff $@ | colordiff | less -R;
 }
 
-export GREP_COLOR='30;42'
-alias grep='grep --color'
-
 ##
 # Complete ssh known hosts (from http://gentoo-wiki.com/TIP_Advanced_zsh_Completion)
 #
@@ -93,7 +91,7 @@ zstyle ':completion:*' hosts $_myhosts
 ##
 # today
 #
-cat /usr/share/calendar/calendar* | grep ^`date +"%m/%d"`
+cat /usr/share/calendar/calendar* | grep "^`date +"%m/%d"`"
 
 ##
 # Color ls.
