@@ -19,3 +19,6 @@ uninstall:
 	rm -f $(HOME)/.vimrc.before
 	rm -f $(HOME)/.vimrc.after
 	rm -f $(HOME)/.janus
+
+defaults:
+	defaults write com.apple.screencapture location ~/Dropbox/Screenshots
