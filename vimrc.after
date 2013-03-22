@@ -31,6 +31,9 @@ highlight NonText guifg=#eee8d5
 highlight MatchParen guibg=#eee8d5 guifg=#000000 gui=none
 "highlight SpecialKey guifg=#eee8d5
 
+" Highlight current line
+set cursorline
+
 " http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
 if version >= 730 
   set relativenumber
