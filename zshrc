@@ -1,7 +1,6 @@
 export PATH=$PATH
 export MANPATH=$MANPATH:/usr/local/share/man:/opt/local/share/man;
 export INFOPATH=$INFOPATH:/opt/local/share/info;
-export NODE_PATH=./node_modules:$HOME/local/node:$HOME/local/node/lib/node_modules
 
 export HISTSIZE=200
 export HISTFILE=~/.zsh_history
