@@ -20,5 +20,14 @@ uninstall:
 	rm -f $(HOME)/.vimrc.after
 	rm -f $(HOME)/.janus
 
+update: update-git uninstall install update-janus
+
+update-git:
+	git pull
+	git submodule foreach git pull
+
+update-janus:
+	cd ~/.vim && rake
+
 defaults:
 	defaults write com.apple.screencapture location ~/Dropbox/Screenshots

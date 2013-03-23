@@ -8,9 +8,7 @@ To uninstall:
 
 To update:
 
-    git pull
-    git submodule foreach git pull
-    make uninstall install
+    make update
 
 ### Vim
 
