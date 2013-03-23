@@ -1,22 +1,24 @@
 " This file is loaded by Janus.
 " http://github.com/carlhuda/janus/
 
+" Indent guides.
 " https://github.com/nathanaelkane/vim-indent-guides
-let g:indent_guides_guide_size = 1
-
-" Highlight hex colours.
-" https://github.com/vim-scripts/hexHighlight.vim
-nnoremap <Leader>hh :call HexHighlight()<Return>
+let g:indent_guides_guide_size=1
 
 " Use solarized theme.
-" http://ethanschoonover.com/solarized
-let g:solarized_termcolors=256
-set t_Co=16
-set background=light
+" http://ethanschoonover.com/solarized/vim-colors-solarized
 colorscheme solarized
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+
+" Invisible character colors.
+highlight NonText ctermfg=240 guifg=#eee8d5
 
 " Keep three lines visible above and below.
-set scrolloff=3         
+set scrolloff=3
 
 " Use four spaces for tabs.
 set tabstop=4
@@ -26,18 +28,8 @@ set softtabstop=4
 " Use TextMate-style invisibles.
 set listchars=tab:▸\ ,eol:¬
 
-" Invisible character colors.
-highlight NonText guifg=#eee8d5
-highlight MatchParen guibg=#eee8d5 guifg=#000000 gui=none
-"highlight SpecialKey guifg=#eee8d5
-
 " Highlight current line
 set cursorline
-
-" http://jeffkreeftmeijer.com/2012/relative-line-numbers-in-vim-for-super-fast-movement/
-if version >= 730 
-  set relativenumber
-endif
 
 " Hide MacVim toolbar.
 set go-=T
@@ -45,10 +37,7 @@ set go-=T
 " Set font.
 set guifont=Menlo\ Regular:h13
 
-" Set default window size.
-set lines=60 columns=120
-
-" Disable arrow keys!
+" Disable arrow keys
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
@@ -65,3 +54,10 @@ nnoremap k gk
 " CTRL-L: PHP parser check
 :autocmd FileType php noremap <C-M> :w!<CR>:!env php %<CR>
 :autocmd FileType php noremap <C-L> :!env php -l %<CR>
+
+" Leader commands
+
+" Highlight hex colours.
+" https://github.com/vim-scripts/hexHighlight.vim
+nnoremap <Leader>hh :call HexHighlight()<Return>
+
