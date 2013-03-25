@@ -61,3 +61,8 @@ nnoremap k gk
 " https://github.com/vim-scripts/hexHighlight.vim
 nnoremap <Leader>hh :call HexHighlight()<Return>
 
+" Incubating...
+
+nnoremap ; :
+
+" ... end incubating
