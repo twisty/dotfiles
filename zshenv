@@ -3,7 +3,10 @@
 
 path=(/usr/bin /bin /usr/sbin /sbin)
 path=(/usr/local/bin /usr/local/sbin $path)
+
+# Macports
 path=(/opt/local/bin /opt/local/sbin $path)
+path=(/opt/local/apache2/bin $path)
 
 # Global node modules.
 if (( $+commands[npm] )) ; then
