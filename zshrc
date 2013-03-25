@@ -6,8 +6,8 @@ export HISTSIZE=200
 export HISTFILE=~/.zsh_history
 export SAVEHIST=200
 
-export EDITOR=nano
-export SVN_EDITOR=nano
+export EDITOR=vim
+export SVN_EDITOR=vim
 export VIM_APP_DIR=/Applications/MacVim
 
 export LC_CTYPE=en_US.UTF-8
