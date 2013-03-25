@@ -1,4 +1,4 @@
-install:
+install: uninstall defaults
 	ln -s $(CURDIR)/colordiffrc $(HOME)/.colordiffrc
 	ln -s $(CURDIR)/screenrc $(HOME)/.screenrc
 	ln -s $(CURDIR)/oh-my-zsh $(HOME)/.oh-my-zsh
@@ -20,7 +20,7 @@ uninstall:
 	rm -f $(HOME)/.vimrc.after
 	rm -f $(HOME)/.janus
 
-update: update-git uninstall install update-janus
+update: update-git install update-janus
 
 update-git:
 	git pull
@@ -31,3 +31,5 @@ update-janus:
 
 defaults:
 	defaults write com.apple.screencapture location ~/Dropbox/Screenshots
+	git config --global color.ui true
+	git config --global color.diff.meta yellow black
