@@ -64,5 +64,6 @@ nnoremap <Leader>hh :call HexHighlight()<Return>
 " Incubating...
 
 nnoremap ; :
+set colorcolumn=81,121
 
 " ... end incubating
