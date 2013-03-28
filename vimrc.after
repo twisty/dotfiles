@@ -64,6 +64,12 @@ nnoremap <Leader>hh :call HexHighlight()<Return>
 " Incubating...
 
 nnoremap ; :
-set colorcolumn=81,121
+
+if exists('+colorcolumn')
+    set colorcolumn=81,121
+endif
+
+" Select all
+nnoremap <Leader>a ggVG
 
 " ... end incubating
