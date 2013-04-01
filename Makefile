@@ -1,5 +1,6 @@
 install: uninstall defaults
 	ln -s $(CURDIR)/colordiffrc $(HOME)/.colordiffrc
+	ln -s $(CURDIR)/editorconfig $(HOME)/.editorconfig
 	ln -s $(CURDIR)/screenrc $(HOME)/.screenrc
 	ln -s $(CURDIR)/oh-my-zsh $(HOME)/.oh-my-zsh
 	ln -s $(CURDIR)/zshrc $(HOME)/.zshrc
@@ -11,6 +12,7 @@ install: uninstall defaults
 
 uninstall:
 	rm -f $(HOME)/.colordiffrc
+	rm -f $(HOME)/.editorconfig
 	rm -f $(HOME)/.screenrc
 	rm -f $(HOME)/.oh-my-zsh
 	rm -f $(HOME)/.zshrc

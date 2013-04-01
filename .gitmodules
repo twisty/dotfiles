@@ -7,3 +7,6 @@
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = git://github.com/robbyrussell/oh-my-zsh.git
+[submodule "janus/editorconfig-vim"]
+	path = janus/editorconfig-vim
+	url = git://github.com/editorconfig/editorconfig-vim.git
