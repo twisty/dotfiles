@@ -10,3 +10,10 @@
 [submodule "janus/editorconfig-vim"]
 	path = janus/editorconfig-vim
 	url = git://github.com/editorconfig/editorconfig-vim.git
+	ignore = dirty
+[submodule "janus/vim-powerline"]
+	path = janus/vim-powerline
+	url = git://github.com/Lokaltog/vim-powerline.git
+[submodule "janus/visSum.vim"]
+	path = janus/visSum.vim
+	url = git://github.com/vim-scripts/visSum.vim.git
