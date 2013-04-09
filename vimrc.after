@@ -57,20 +57,21 @@ autocmd FileType php noremap <C-L> :!env php -l %<CR>
 
 " Leader commands
 
-" Highlight hex colours.
-" https://github.com/vim-scripts/hexHighlight.vim
+" <Leader>hh - Highlight hex colours. (https://github.com/vim-scripts/hexHighlight.vim)
 nnoremap <Leader>hh :call HexHighlight()<Return>
 
 " Incubating...
 
 nnoremap ; :
 
-if exists('+colorcolumn')
-    set colorcolumn=81,121
-endif
-
-" Select all
+" <Leader>a — Select all.
 nnoremap <Leader>a ggVG
+
+" <Leader>e - Find the visual selection using vimgrep. (http://qr.ae/TSdv6)
+vnoremap <Leader>e "hy:vimgrep "<C-r>h" **/*.* \| copen
+
+" Visual select most recently edited text
+nnoremap gV `[v`]
 
 " Configure OmniCompletion
 filetype plugin on
@@ -82,7 +83,9 @@ autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
-" Visual select most recently edited text
-nmap gV `[v`]
+" Visually show column widths.
+if exists('+colorcolumn')
+    set colorcolumn=81,121
+endif
 
 " ... end incubating
