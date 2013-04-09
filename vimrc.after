@@ -69,7 +69,10 @@ if exists('+colorcolumn')
     set colorcolumn=81,121
 endif
 
-" Select all
+" <Leader>a — Select all.
 nnoremap <Leader>a ggVG
+
+" <Leader>e - Find the visual selection using vimgrep. (http://qr.ae/TSdv6)
+vnoremap <Leader>e "hy:vimgrep "<C-r>h" **/*.* \| copen
 
 " ... end incubating
