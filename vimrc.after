@@ -1,10 +1,6 @@
 " This file is loaded by Janus.
 " http://github.com/carlhuda/janus/
 
-" Indent guides.
-" https://github.com/nathanaelkane/vim-indent-guides
-let g:indent_guides_guide_size=1
-
 " Use solarized theme.
 " http://ethanschoonover.com/solarized/vim-colors-solarized
 colorscheme solarized
@@ -17,6 +13,20 @@ endif
 " Invisible character colors.
 highlight NonText ctermfg=240 guifg=#eee8d5
 
+" Use TextMate-style invisibles.
+set listchars=tab:▸\ ,eol:¬
+
+" Highlight current line
+set cursorline
+
+" Highlight some common column widths.
+if exists('+colorcolumn')
+    set colorcolumn=81,121
+endif
+
+" Indent guides. (https://github.com/nathanaelkane/vim-indent-guides)
+let g:indent_guides_guide_size=1
+
 " Keep three lines visible above and below.
 set scrolloff=3
 
@@ -24,12 +34,6 @@ set scrolloff=3
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-
-" Use TextMate-style invisibles.
-set listchars=tab:▸\ ,eol:¬
-
-" Highlight current line
-set cursorline
 
 " Hide MacVim toolbar.
 set go-=T
@@ -82,10 +86,5 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-
-" Visually show column widths.
-if exists('+colorcolumn')
-    set colorcolumn=81,121
-endif
 
 " ... end incubating
