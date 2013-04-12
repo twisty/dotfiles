@@ -1,10 +1,6 @@
 " This file is loaded by Janus.
 " http://github.com/carlhuda/janus/
 
-" Indent guides.
-" https://github.com/nathanaelkane/vim-indent-guides
-let g:indent_guides_guide_size=1
-
 " Use solarized theme.
 " http://ethanschoonover.com/solarized/vim-colors-solarized
 colorscheme solarized
@@ -17,6 +13,20 @@ endif
 " Invisible character colors.
 highlight NonText ctermfg=240 guifg=#eee8d5
 
+" Use TextMate-style invisibles.
+set listchars=tab:▸\ ,eol:¬
+
+" Highlight current line
+set cursorline
+
+" Highlight some common column widths.
+if exists('+colorcolumn')
+    set colorcolumn=81,121
+endif
+
+" Indent guides. (https://github.com/nathanaelkane/vim-indent-guides)
+let g:indent_guides_guide_size=1
+
 " Keep three lines visible above and below.
 set scrolloff=3
 
@@ -24,12 +34,6 @@ set scrolloff=3
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-
-" Use TextMate-style invisibles.
-set listchars=tab:▸\ ,eol:¬
-
-" Highlight current line
-set cursorline
 
 " Hide MacVim toolbar.
 set go-=T
@@ -52,27 +56,35 @@ nnoremap k gk
 " http://www.mwop.net/blog/164-Vim-Productivity-Tips-for-PHP-Developers.html
 " CTRL-M: Run file with PHP CLI
 " CTRL-L: PHP parser check
-:autocmd FileType php noremap <C-M> :w!<CR>:!env php %<CR>
-:autocmd FileType php noremap <C-L> :!env php -l %<CR>
+autocmd FileType php noremap <C-M> :w!<CR>:!env php %<CR>
+autocmd FileType php noremap <C-L> :!env php -l %<CR>
 
 " Leader commands
 
-" Highlight hex colours.
-" https://github.com/vim-scripts/hexHighlight.vim
+" <Leader>hh - Highlight hex colours. (https://github.com/vim-scripts/hexHighlight.vim)
 nnoremap <Leader>hh :call HexHighlight()<Return>
 
 " Incubating...
 
 nnoremap ; :
 
-if exists('+colorcolumn')
-    set colorcolumn=81,121
-endif
-
 " <Leader>a — Select all.
 nnoremap <Leader>a ggVG
 
 " <Leader>e - Find the visual selection using vimgrep. (http://qr.ae/TSdv6)
 vnoremap <Leader>e "hy:vimgrep "<C-r>h" **/*.* \| copen
+
+" Visual select most recently edited text
+nnoremap gV `[v`]
+
+" Configure OmniCompletion
+filetype plugin on
+set completeopt=menu,menuone,preview,longest
+set omnifunc=syntaxcomplete#Complete
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 " ... end incubating
