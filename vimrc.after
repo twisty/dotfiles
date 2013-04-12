@@ -66,8 +66,6 @@ nnoremap <Leader>hh :call HexHighlight()<Return>
 
 " Incubating...
 
-nnoremap ; :
-
 " <Leader>a — Select all.
 nnoremap <Leader>a ggVG
 
