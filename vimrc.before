@@ -1,2 +1,8 @@
 " Remap leader key.
 let mapleader = ","
+
+" Stop VimWiki claiming markdown files (https://github.com/carlhuda/janus/issues/479)
+let g:vimwiki_ext2syntax = {}
+
+" Disable plugins
+call janus#disable_plugin('vimwiki')
