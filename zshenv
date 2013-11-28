@@ -5,8 +5,10 @@ path=(/usr/bin /bin /usr/sbin /sbin)
 path=(/usr/local/bin /usr/local/sbin $path)
 
 # Macports
-path=(/opt/local/bin /opt/local/sbin $path)
-path=(/opt/local/apache2/bin $path)
+if (( $+commands[port] )) ; then
+  path=(/opt/local/bin /opt/local/sbin $path)
+  path=(/opt/local/apache2/bin $path)
+fi
 
 # Global node modules.
 if (( $+commands[npm] )) ; then
@@ -17,6 +19,6 @@ path=(~/local/bin $path)
 path=(~/Applications $path)
 
 # If brew is installed, try and set the correct PHP path
-if (( $+commands[brew] )) ; then
-    PATH="$(brew --prefix php54)/bin:$PATH"
-fi
+# if (( $+commands[brew] )) ; then
+#   path="$(brew --prefix php54)/bin:$path"
+# fi
