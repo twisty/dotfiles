@@ -1,6 +1,7 @@
 install: uninstall defaults
 	ln -s $(CURDIR)/colordiffrc $(HOME)/.colordiffrc
 	ln -s $(CURDIR)/editorconfig $(HOME)/.editorconfig
+	ln -s $(CURDIR)/gitexcludes $(HOME)/.gitexcludes
 	ln -s $(CURDIR)/screenrc $(HOME)/.screenrc
 	ln -s $(CURDIR)/oh-my-zsh $(HOME)/.oh-my-zsh
 	ln -s $(CURDIR)/zshrc $(HOME)/.zshrc
@@ -13,6 +14,7 @@ install: uninstall defaults
 uninstall:
 	rm -f $(HOME)/.colordiffrc
 	rm -f $(HOME)/.editorconfig
+	rm -f $(HOME)/.gitexcludes
 	rm -f $(HOME)/.screenrc
 	rm -f $(HOME)/.oh-my-zsh
 	rm -f $(HOME)/.zshrc
@@ -35,3 +37,4 @@ defaults:
 	defaults write com.apple.screencapture location ~/Dropbox/Screenshots
 	git config --global color.ui true
 	git config --global color.diff.meta yellow black
+	git config --global core.excludesfile '~/.gitexcludes'
