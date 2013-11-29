@@ -5,8 +5,12 @@ path=(/usr/bin /bin /usr/sbin /sbin)
 path=(/usr/local/bin /usr/local/sbin $path)
 
 # Macports
-if (( $+commands[port] )) ; then
+if [[ -a /opt/local/bin/port ]] ; then
   path=(/opt/local/bin /opt/local/sbin $path)
+fi
+
+# Macports apache
+if [[ -a /opt/local/apache2/bin/httpd ]] ; then
   path=(/opt/local/apache2/bin $path)
 fi
 
