@@ -54,9 +54,9 @@ nnoremap j gj
 nnoremap k gk
 
 " http://www.mwop.net/blog/164-Vim-Productivity-Tips-for-PHP-Developers.html
-" CTRL-M: Run file with PHP CLI
+" <Leader>rp: Run php file with PHP CLI
 " CTRL-L: PHP parser check
-autocmd FileType php noremap <C-M> :w!<CR>:!env php %<CR>
+autocmd FileType php noremap <Leader>rp :!env php %<CR>
 autocmd FileType php noremap <C-L> :!env php -l %<CR>
 
 " Leader commands
@@ -65,6 +65,19 @@ autocmd FileType php noremap <C-L> :!env php -l %<CR>
 nnoremap <Leader>hh :call HexHighlight()<Return>
 
 " Incubating...
+
+" http://vim.wikia.com/wiki/Switching_case_of_characters
+function! TwiddleCase(str)
+  if a:str ==# toupper(a:str)
+    let result = tolower(a:str)
+  elseif a:str ==# tolower(a:str)
+    let result = substitute(a:str,'\(\<\w\+\>\)', '\u\1', 'g')
+  else
+    let result = toupper(a:str)
+  endif
+  return result
+endfunction
+vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
 " <Leader>a — Select all.
 nnoremap <Leader>a ggVG
