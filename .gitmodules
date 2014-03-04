@@ -11,9 +11,12 @@
 	path = janus/editorconfig-vim
 	url = git://github.com/editorconfig/editorconfig-vim.git
 	ignore = dirty
-[submodule "janus/vim-powerline"]
-	path = janus/vim-powerline
-	url = git://github.com/Lokaltog/vim-powerline.git
 [submodule "janus/visSum.vim"]
 	path = janus/visSum.vim
 	url = git://github.com/vim-scripts/visSum.vim.git
+[submodule "janus/vim-vinegar"]
+	path = janus/vim-vinegar
+	url = git://github.com/tpope/vim-vinegar.git
+[submodule "janus/vim-airline"]
+	path = janus/vim-airline
+	url = https://github.com/bling/vim-airline

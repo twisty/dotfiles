@@ -24,8 +24,20 @@ if exists('+colorcolumn')
     set colorcolumn=81,121
 endif
 
-" Indent guides. (https://github.com/nathanaelkane/vim-indent-guides)
+" Indent guides.
+" https://github.com/nathanaelkane/vim-indent-guides
 let g:indent_guides_guide_size=1
+
+" Airline.
+" https://github.com/bling/vim-airline
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.whitespace = 'Ξ'
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
 
 " Keep three lines visible above and below.
 set scrolloff=3

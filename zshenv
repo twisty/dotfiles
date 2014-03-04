@@ -16,7 +16,7 @@ fi
 
 # Global node modules.
 if (( $+commands[npm] )) ; then
-  path=($(npm get prefix)/bin $path)
+  path=(~/local/node/bin $path)
 fi
 
 path=(~/local/bin $path)

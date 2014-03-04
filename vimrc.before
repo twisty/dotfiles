@@ -6,3 +6,5 @@ let g:vimwiki_ext2syntax = {}
 
 " Disable plugins
 call janus#disable_plugin('vimwiki')
+call janus#disable_plugin('nerdtree', 'Trying out vim-vinegar.')
+
