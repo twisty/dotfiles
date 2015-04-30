@@ -1,3 +1,11 @@
+# Here to allow Ctrl-S in terminal
+# http://unix.stackexchange.com/a/72092
+stty -ixon
+
+if [ -e /lib/terminfo/x/xterm-256color ]; then
+    export TERM='xterm-256color'
+fi
+
 export PATH=$PATH
 export MANPATH=$MANPATH:/usr/local/share/man:/opt/local/share/man;
 export INFOPATH=$INFOPATH:/opt/local/share/info;
