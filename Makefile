@@ -34,7 +34,9 @@ update-janus:
 	cd ~/.vim && rake
 
 defaults:
-	defaults write com.apple.screencapture location ~/Dropbox/Screenshots
 	git config --global color.ui true
 	git config --global color.diff.meta yellow black
 	git config --global core.excludesfile '~/.gitexcludes'
+
+defaults-mac:
+	defaults write com.apple.screencapture location ~/Dropbox/Screenshots
