@@ -1,20 +1,29 @@
-" This file is loaded by Janus.
-" http://github.com/carlhuda/janus/
+" Remap leader key.
+let mapleader = ","
 
-" Use solarized theme.
-" http://ethanschoonover.com/solarized/vim-colors-solarized
-colorscheme solarized
+set t_Co=16
+
 if has('gui_running')
     set background=light
 else
     set background=dark
 endif
 
+" Use solarized theme.
+" http://ethanschoonover.com/solarized/vim-colors-solarized
+colorscheme solarized
+
 " Invisible character colors.
 highlight NonText ctermfg=240 guifg=#eee8d5
 
 " Use TextMate-style invisibles.
-set listchars=tab:▸\ ,eol:¬
+set listchars=tab:▸\ ,eol:¬,trail:·
+
+" Show line numbers
+set number
+
+" Show invisibles
+set list
 
 " Highlight current line
 set cursorline
@@ -28,17 +37,6 @@ endif
 " https://github.com/nathanaelkane/vim-indent-guides
 let g:indent_guides_guide_size=1
 
-" Airline.
-" https://github.com/bling/vim-airline
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.whitespace = 'Ξ'
-let g:airline#extensions#whitespace#enabled = 1
-let g:airline#extensions#syntastic#enabled = 1
-
 " Keep three lines visible above and below.
 set scrolloff=3
 
@@ -46,6 +44,7 @@ set scrolloff=3
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+set expandtab
 
 " Hide MacVim toolbar.
 set go-=T
@@ -64,6 +63,18 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
+
+" Diagraph mappings for some frequently­ used special characters.
+" These are similar to the Mac keyboard layout to which I'm accustomed.
+" I've since discovered '6 and '9 (and their double-quote cousins) for curly
+" quotes. Makes sense. I'll keep these here and review which ones win in time.
+if has("digraphs")
+    silent! dig '[ 8216  " LEFT SINGLE QUOTATION MARK
+    silent! dig '] 8217  " RIGHT SINGLE QUOTATION MARK
+    silent! dig \"[ 8220 " LEFT DOUBLE QUOTATION MARK
+    silent! dig \"] 8221 " RIGHT DOUBLE QUOTATION MARK
+    silent! dig ;; 8230  " HORIZONTAL ELLIPSIS
+endif
 
 " http://www.mwop.net/blog/164-Vim-Productivity-Tips-for-PHP-Developers.html
 " <Leader>rp: Run php file with PHP CLI
@@ -110,4 +121,9 @@ autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
+" Use Ctrl-S for save
+" http://stackoverflow.com/a/3448551
+noremap <silent> <C-S> :update<CR>
+vnoremap <silent> <C-S> <C-C>:update<CR>
+inoremap <silent> <C-S> <C-O>:update<CR>
 " ... end incubating
