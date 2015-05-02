@@ -3,6 +3,7 @@ install: uninstall defaults
 	ln -s $(CURDIR)/editorconfig $(HOME)/.editorconfig
 	ln -s $(CURDIR)/gitexcludes $(HOME)/.gitexcludes
 	ln -s $(CURDIR)/screenrc $(HOME)/.screenrc
+	ln -s $(CURDIR)/tmux.conf $(HOME)/.tmux.conf
 	ln -s $(CURDIR)/oh-my-zsh $(HOME)/.oh-my-zsh
 	ln -s $(CURDIR)/zshrc $(HOME)/.zshrc
 	ln -s $(CURDIR)/zshenv $(HOME)/.zshenv
@@ -16,6 +17,7 @@ uninstall:
 	rm -f $(HOME)/.editorconfig
 	rm -f $(HOME)/.gitexcludes
 	rm -f $(HOME)/.screenrc
+	rm -f $(HOME)/.tmux.conf
 	rm -f $(HOME)/.oh-my-zsh
 	rm -f $(HOME)/.zshrc
 	rm -f $(HOME)/.zshenv
