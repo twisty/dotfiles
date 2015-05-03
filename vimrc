@@ -1,3 +1,35 @@
+" Vundle...
+" =========
+
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tpope/vim-sensible'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-vinegar'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'pangloss/vim-javascript'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'mxw/vim-jsx'
+
+" <leader>ig
+Plugin 'nathanaelkane/vim-indent-guides'
+
+call vundle#end()
+filetype plugin indent on
+
+" ...end Vundle
+
+syntax enable
+
 " Remap leader key.
 let mapleader = ","
 
@@ -32,10 +64,6 @@ set cursorline
 if exists('+colorcolumn')
     set colorcolumn=81,121
 endif
-
-" Indent guides.
-" https://github.com/nathanaelkane/vim-indent-guides
-let g:indent_guides_guide_size=1
 
 " Keep three lines visible above and below.
 set scrolloff=3
@@ -76,18 +104,33 @@ if has("digraphs")
     silent! dig ;; 8230  " HORIZONTAL ELLIPSIS
 endif
 
-" http://www.mwop.net/blog/164-Vim-Productivity-Tips-for-PHP-Developers.html
-" <Leader>rp: Run php file with PHP CLI
-" CTRL-L: PHP parser check
-autocmd FileType php noremap <Leader>rp :!env php %<CR>
-autocmd FileType php noremap <C-L> :!env php -l %<CR>
+" Plugin: vim-jsx
+" Enable JSX syntax highlighting in .js files.
+" https://github.com/mxw/vim-jsx
+let g:jsx_ext_required = 0
 
 " Leader commands
+" ===============
 
-" <Leader>hh - Highlight hex colours. (https://github.com/vim-scripts/hexHighlight.vim)
-nnoremap <Leader>hh :call HexHighlight()<Return>
+" <Leader>a — Select all.
+nnoremap <Leader>a ggVG
 
 " Incubating...
+" =============
+
+" Syntastic newbie settings
+" https://github.com/scrooloose/syntastic#settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" Syntastic Javascript linter
+let g:syntastic_javascript_checkers = ['eslint']
 
 " http://vim.wikia.com/wiki/Switching_case_of_characters
 function! TwiddleCase(str)
@@ -101,9 +144,6 @@ function! TwiddleCase(str)
   return result
 endfunction
 vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
-
-" <Leader>a — Select all.
-nnoremap <Leader>a ggVG
 
 " <Leader>e - Find the visual selection using vimgrep. (http://qr.ae/TSdv6)
 vnoremap <Leader>e "hy:vimgrep "<C-r>h" **/*.* \| copen
@@ -126,4 +166,5 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 noremap <silent> <C-S> :update<CR>
 vnoremap <silent> <C-S> <C-C>:update<CR>
 inoremap <silent> <C-S> <C-O>:update<CR>
+
 " ... end incubating

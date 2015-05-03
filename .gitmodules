@@ -1,22 +1,3 @@
-[submodule "janus/hexHighlight"]
-	path = janus/hexHighlight
-	url = https://github.com/vim-scripts/hexHighlight.vim.git
-[submodule "janus/vim-indent-guides"]
-	path = janus/vim-indent-guides
-	url = https://github.com/nathanaelkane/vim-indent-guides.git
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = git://github.com/robbyrussell/oh-my-zsh.git
-[submodule "janus/editorconfig-vim"]
-	path = janus/editorconfig-vim
-	url = git://github.com/editorconfig/editorconfig-vim.git
-	ignore = dirty
-[submodule "janus/visSum.vim"]
-	path = janus/visSum.vim
-	url = git://github.com/vim-scripts/visSum.vim.git
-[submodule "janus/vim-vinegar"]
-	path = janus/vim-vinegar
-	url = git://github.com/tpope/vim-vinegar.git
-[submodule "janus/vim-airline"]
-	path = janus/vim-airline
-	url = https://github.com/bling/vim-airline

@@ -9,12 +9,3 @@ To uninstall:
 To update:
 
     make update
-
-### Vim
-
-Vim config requires Janus, so [install Janus](https://github.com/carlhuda/janus#installation) first.
-
-Vim config also requires some git submodules, so:
-
-    git submodule init
-    git submodule update
