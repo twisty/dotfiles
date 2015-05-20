@@ -4,7 +4,6 @@ install: uninstall defaults
 	ln -s $(CURDIR)/gitexcludes $(HOME)/.gitexcludes
 	ln -s $(CURDIR)/screenrc $(HOME)/.screenrc
 	ln -s $(CURDIR)/tmux.conf $(HOME)/.tmux.conf
-	ln -s $(CURDIR)/oh-my-zsh $(HOME)/.oh-my-zsh
 	ln -s $(CURDIR)/zshrc $(HOME)/.zshrc
 	ln -s $(CURDIR)/zshenv $(HOME)/.zshenv
 	ln -s $(CURDIR)/nanorc $(HOME)/.nanorc
@@ -16,17 +15,10 @@ uninstall:
 	rm -f $(HOME)/.gitexcludes
 	rm -f $(HOME)/.screenrc
 	rm -f $(HOME)/.tmux.conf
-	rm -f $(HOME)/.oh-my-zsh
 	rm -f $(HOME)/.zshrc
 	rm -f $(HOME)/.zshenv
 	rm -f $(HOME)/.nanorc
 	rm -f $(HOME)/.vimrc
-
-update: update-git install
-
-update-git:
-	git pull
-	git submodule foreach git pull
 
 defaults:
 	git config --global color.ui true
