@@ -21,6 +21,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'mxw/vim-jsx'
 Plugin 'ConradIrwin/vim-bracketed-paste'
+Plugin 'reedes/vim-wordy'
 
 " <leader>ig
 Plugin 'nathanaelkane/vim-indent-guides'
