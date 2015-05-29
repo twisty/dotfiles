@@ -6,6 +6,7 @@ install: uninstall defaults
 	ln -s $(CURDIR)/tmux.conf $(HOME)/.tmux.conf
 	ln -s $(CURDIR)/zshrc $(HOME)/.zshrc
 	ln -s $(CURDIR)/zshenv $(HOME)/.zshenv
+	ln -s $(CURDIR)/oh-my-zsh-custom $(HOME)/.oh-my-zsh-custom
 	ln -s $(CURDIR)/nanorc $(HOME)/.nanorc
 	ln -s $(CURDIR)/vimrc $(HOME)/.vimrc
 
@@ -17,6 +18,7 @@ uninstall:
 	rm -f $(HOME)/.tmux.conf
 	rm -f $(HOME)/.zshrc
 	rm -f $(HOME)/.zshenv
+	rm -f $(HOME)/.oh-my-zsh-custom
 	rm -f $(HOME)/.nanorc
 	rm -f $(HOME)/.vimrc
 

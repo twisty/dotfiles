@@ -21,7 +21,9 @@ export VIM_APP_DIR=/Applications/MacVim
 export LC_CTYPE=en_US.UTF-8
 
 # oh-my-zsh configuration.
+ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
 ZSH=$HOME/.oh-my-zsh
+ZSH_THEME="twisty"
 plugins=(git osx vi-mode)
 source $ZSH/oh-my-zsh.sh
 
@@ -30,39 +32,6 @@ source $ZSH/oh-my-zsh.sh
 # use cd ~n to access stack
 #
 setopt auto_pushd
-
-##
-# colours
-#
-fg_green=$'%{\e[0;32m%}'
-fg_blue=$'%{\e[0;34m%}'
-fg_cyan=$'%{\e[0;36m%}'
-fg_red=$'%{\e[0;31m%}'
-fg_brown=$'%{\e[0;33m%}'
-fg_purple=$'%{\e[0;35m%}'
-fg_yellow=$'%{\e[0;33m%}'
-
-fg_light_gray=$'%{\e[0;37m%}'
-fg_dark_gray=$'%{\e[1;30m%}'
-fg_light_blue=$'%{\e[1;34m%}'
-fg_light_green=$'%{\e[1;32m%}'
-fg_light_cyan=$'%{\e[1;36m%}'
-fg_light_red=$'%{\e[1;31m%}'
-fg_light_purple=$'%{\e[1;35m%}'
-fg_no_colour=$'%{\e[0m%}'
-
-fg_white=$'%{\e[1;37m%}'
-fg_black=$'%{\e[0;30m%}'
-
-function prompt_char {
-    git branch >/dev/null 2>/dev/null && echo '±' && return
-    echo '○'
-}
-
-##
-# prompt
-#
-PROMPT='${fg_green}%T ${fg_cyan}%m ${fg_yellow}%3~ ${fg_cyan}% $(prompt_char) ${fg_no_colour}'
 
 ##
 # aliases
