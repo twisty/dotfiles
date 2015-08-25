@@ -19,7 +19,11 @@ if (( $+commands[npm] )) ; then
   path=(~/local/node/bin $path)
 fi
 
-path=(~/.composer/vendor/bin $path)
+# Composer
+if (( $+commands[composer] )) ; then
+  path=(~/.composer/vendor/bin $path)
+fi
+
 path=(~/local/bin $path)
 path=(~/Applications $path)
 

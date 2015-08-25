@@ -19,8 +19,6 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'pangloss/vim-javascript'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'mxw/vim-jsx'
 Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'reedes/vim-wordy'
 
@@ -40,9 +38,9 @@ let mapleader = ","
 set t_Co=16
 
 if has('gui_running')
-    set background=light
+  set background=light
 else
-    set background=dark
+  set background=dark
 endif
 
 " Use solarized theme.
@@ -66,7 +64,7 @@ set cursorline
 
 " Highlight some common column widths.
 if exists('+colorcolumn')
-    set colorcolumn=81,121
+  set colorcolumn=81,121
 endif
 
 " Keep three lines visible above and below.
@@ -105,17 +103,12 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 " I've since discovered '6 and '9 (and their double-quote cousins) for curly
 " quotes. Makes sense. I'll keep these here and review which ones win in time.
 if has("digraphs")
-    silent! dig '[ 8216  " LEFT SINGLE QUOTATION MARK
-    silent! dig '] 8217  " RIGHT SINGLE QUOTATION MARK
-    silent! dig \"[ 8220 " LEFT DOUBLE QUOTATION MARK
-    silent! dig \"] 8221 " RIGHT DOUBLE QUOTATION MARK
-    silent! dig ;; 8230  " HORIZONTAL ELLIPSIS
+  silent! dig '[ 8216  " LEFT SINGLE QUOTATION MARK
+  silent! dig '] 8217  " RIGHT SINGLE QUOTATION MARK
+  silent! dig \"[ 8220 " LEFT DOUBLE QUOTATION MARK
+  silent! dig \"] 8221 " RIGHT DOUBLE QUOTATION MARK
+  silent! dig ;; 8230  " HORIZONTAL ELLIPSIS
 endif
-
-" Plugin: vim-jsx
-" Enable JSX syntax highlighting in .js files.
-" - https://github.com/mxw/vim-jsx
-let g:jsx_ext_required = 0
 
 " Leader commands
 " ===============
@@ -139,6 +132,10 @@ let g:syntastic_check_on_wq = 0
 
 " Syntastic Javascript linter.
 let g:syntastic_javascript_checkers = ['eslint']
+
+" Syntastic PHP code sniffer
+let g:syntastic_php_checkers = ['php', 'phpcs']
+let g:syntastic_php_phpcs_args = "-n --report=csv"
 
 " Better twiddle case.
 " - http://vim.wikia.com/wiki/Switching_case_of_characters
@@ -182,7 +179,7 @@ inoremap jk <Esc>
 inoremap kj <Esc>
 
 " Airline.
-" https://github.com/bling/vim-airline
+" - https://github.com/bling/vim-airline
 let g:airline_mode_map = {
     \ '__' : '-',
     \ 'n'  : 'N',
@@ -199,7 +196,7 @@ let g:airline_mode_map = {
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+  let g:airline_symbols = {}
 endif
 let g:airline_symbols.linenr = '¶'
 let g:airline_symbols.branch = '⎇'
@@ -207,5 +204,30 @@ let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.whitespace = 'Ξ'
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
+
+" Wordy
+nnoremap <silent> K :NextWordy<cr>
+
+" Use a thin cursor shape when in insert mode.
+" - https://gist.github.com/andyfowler/1195581
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+" Enable mouse support.
+if has('mouse')
+  set mouse=a
+  if has('mouse_sgr')
+    set ttymouse=sgr
+  else
+    set ttymouse=xterm2
+  endif
+  map <ScrollWheelUp> <C-Y>
+  map <ScrollWheelDown> <C-E>
+endif
 
 " ... end incubating
