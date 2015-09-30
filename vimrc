@@ -56,6 +56,9 @@ set listchars=tab:▸\ ,eol:¬,trail:·
 " Show line numbers.
 set number
 
+" <Leader>n - Toggle relative line numbering.
+nnoremap <Leader>n :set relativenumber!<CR>
+
 " Show invisibles.
 set list
 
@@ -163,6 +166,21 @@ function! TwiddleCase(str)
   return result
 endfunction
 vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
+
+" Searching
+" =========
+set ignorecase
+set smartcase
+
+" Centre screen when jumping between search matches.
+nmap n nzz
+nmap N Nzz
+
+" Tab goes to next search match without centring the screen.
+nnoremap <Tab> n
+
+" <Leader>hs - Toggle search highlighting.
+nnoremap <Leader>hs :set hlsearch!<CR>
 
 " <Leader>e - Find the visual selection using vimgrep.
 " - http://qr.ae/TSdv6
