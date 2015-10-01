@@ -60,6 +60,9 @@ set listchars=tab:▸\ ,eol:¬,trail:·
 " Show line numbers.
 set number
 
+" <Leader>n — Toggle relative line numbering.
+nnoremap <Leader>n :set relativenumber!<CR>
+
 " Show invisibles.
 set list
 
@@ -105,7 +108,22 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 " Diagraph mappings.
 if has("digraphs")
   silent! dig ;; 8230  " HORIZONTAL ELLIPSIS
+  silent! dig -n 8211  " EN DASH (vim default is -N)
+  silent! dig -m 8212  " EM DASH (vim default is -M)
 endif
+
+" Use a thin cursor shape when in insert mode.
+" - https://gist.github.com/andyfowler/1195581
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+" Stop cursor blinking in normal mode.
+set gcr=n:blinkon0
 
 " Leader commands
 " ===============
@@ -119,15 +137,15 @@ noremap <Leader>hs :set hlsearch! hlsearch?<CR>
 " e — Find the visual selection using vimgrep: http://qr.ae/TSdv6
 vnoremap <Leader>e "hy:vimgrep "<C-r>h" **/*.* \| copen
 
+" b — Match bracket (easier to reach than %)
+map <Leader>b %
+
 " Incubating...
 " =============
 
 inoremap (( ()<Left>
 inoremap [[ []<Left>
 inoremap {{ {}<Left>
-
-" <Tab> is easier to reach than %
-map <Tab> %
 
 set noswapfile
 
@@ -173,7 +191,29 @@ function! TwiddleCase(str)
 endfunction
 vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
-" OmniCompletion.
+" Searching
+" =========
+set ignorecase
+set smartcase
+
+" Centre screen when jumping between search matches.
+nmap n nzz
+nmap N Nzz
+
+" Tab goes to next search match without centring the screen.
+nnoremap <Tab> n
+
+" <Leader>hs — Toggle search highlighting.
+nnoremap <Leader>hs :set hlsearch!<CR>
+
+" <Leader>e - Find the visual selection using vimgrep.
+" - http://qr.ae/TSdv6
+vnoremap <Leader>e "hy:vimgrep "<C-r>h" **/*.* \| copen
+
+" Visual select most recently edited text.
+nnoremap gV `[v`]
+
+" Configure OmniCompletion.
 filetype plugin on
 set completeopt=menu,menuone,preview,longest
 set omnifunc=syntaxcomplete#Complete
@@ -220,18 +260,8 @@ let g:airline_symbols.whitespace = 'Ξ'
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 
-" Wordy
+" Wordy.
 nnoremap <silent> K :NextWordy<CR>
-
-" Use a thin cursor shape when in insert mode.
-" - https://gist.github.com/andyfowler/1195581
-if exists('$TMUX')
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
 
 " Enable mouse support.
 if has('mouse')
