@@ -23,6 +23,9 @@ Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'reedes/vim-wordy'
 Plugin 'xsbeats/vim-blade'
 
+" <Leader>su
+Plugin 'vim-scripts/visSum.vim'
+
 " <Leader>ig
 Plugin 'nathanaelkane/vim-indent-guides'
 
@@ -119,6 +122,11 @@ vnoremap <Leader>e "hy:vimgrep "<C-r>h" **/*.* \| copen
 " Incubating...
 " =============
 
+inoremap (( ()<Left>
+inoremap [[ []<Left>
+inoremap {{ {}<Left>
+
+" <Tab> is easier to reach than %
 map <Tab> %
 
 set noswapfile
