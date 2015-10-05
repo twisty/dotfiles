@@ -24,7 +24,7 @@ export LC_CTYPE=en_US.UTF-8
 ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="twisty"
-plugins=(git osx vi-mode)
+plugins=(git osx vi-mode npm history-substring-search)
 source $ZSH/oh-my-zsh.sh
 
 ##
@@ -112,3 +112,8 @@ cat /usr/share/calendar/calendar* | grep "^`date +"%m/%d"`"
 
 export CLICOLOR=1;
 export LSCOLORS=gxcxfxexdxxxxxxxxxagag;
+
+export NVM_DIR="/home/tim/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+nvm use stable

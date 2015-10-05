@@ -21,8 +21,12 @@ Plugin 'scrooloose/syntastic'
 Plugin 'pangloss/vim-javascript'
 Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'reedes/vim-wordy'
+Plugin 'xsbeats/vim-blade'
 
-" <leader>ig
+" <Leader>su
+Plugin 'vim-scripts/visSum.vim'
+
+" <Leader>ig
 Plugin 'nathanaelkane/vim-indent-guides'
 
 call vundle#end()
@@ -56,7 +60,7 @@ set listchars=tab:▸\ ,eol:¬,trail:·
 " Show line numbers.
 set number
 
-" <Leader>n - Toggle relative line numbering.
+" <Leader>n — Toggle relative line numbering.
 nnoremap <Leader>n :set relativenumber!<CR>
 
 " Show invisibles.
@@ -101,16 +105,11 @@ nnoremap k gk
 " - https://github.com/tpope/vim-markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
-" Diagraph mappings for some frequently­ used special characters.
-" These are similar to the Mac keyboard layout to which I'm accustomed.
-" I've since discovered '6 and '9 (and their double-quote cousins) for curly
-" quotes. Makes sense. I'll keep these here and review which ones win in time.
+" Diagraph mappings.
 if has("digraphs")
-  silent! dig '[ 8216  " LEFT SINGLE QUOTATION MARK
-  silent! dig '] 8217  " RIGHT SINGLE QUOTATION MARK
-  silent! dig \"[ 8220 " LEFT DOUBLE QUOTATION MARK
-  silent! dig \"] 8221 " RIGHT DOUBLE QUOTATION MARK
   silent! dig ;; 8230  " HORIZONTAL ELLIPSIS
+  silent! dig -n 8211  " EN DASH (vim default is -N)
+  silent! dig -m 8212  " EM DASH (vim default is -M)
 endif
 
 " Use a thin cursor shape when in insert mode.
@@ -129,11 +128,36 @@ set gcr=n:blinkon0
 " Leader commands
 " ===============
 
-" <Leader>a — Select all.
+" a — Select all.
 nnoremap <Leader>a ggVG
+
+" hs — Toggle search highlighting.
+noremap <Leader>hs :set hlsearch! hlsearch?<CR>
+
+" e — Find the visual selection using vimgrep: http://qr.ae/TSdv6
+vnoremap <Leader>e "hy:vimgrep "<C-r>h" **/*.* \| copen
+
+" b — Match bracket (easier to reach than %)
+map <Leader>b %
 
 " Incubating...
 " =============
+
+inoremap (( ()<Left>
+inoremap [[ []<Left>
+inoremap {{ {}<Left>
+
+set noswapfile
+
+" Copy the current text selection to the system clipboard
+" Note: this doesn’t work at the moment.
+if has('gui_running')
+  noremap <Leader>y "+y
+else
+  " Copy to attached terminal using the yank script:
+  " - https://github.com/sunaku/home/blob/master/bin/yank
+  noremap <Leader>y y:call system('~/.vim/osc52-yank.sh', @0)<CR>
+endif
 
 " Syntastic newbie settings.
 " - https://github.com/scrooloose/syntastic#settings
@@ -149,7 +173,7 @@ let g:syntastic_check_on_wq = 0
 " Syntastic Javascript linter.
 let g:syntastic_javascript_checkers = ['eslint']
 
-" Syntastic PHP code sniffer
+" Syntastic PHP code sniffer.
 let g:syntastic_php_checkers = ['php', 'phpcs']
 let g:syntastic_php_phpcs_args = "-n --report=csv"
 
@@ -179,7 +203,7 @@ nmap N Nzz
 " Tab goes to next search match without centring the screen.
 nnoremap <Tab> n
 
-" <Leader>hs - Toggle search highlighting.
+" <Leader>hs — Toggle search highlighting.
 nnoremap <Leader>hs :set hlsearch!<CR>
 
 " <Leader>e - Find the visual selection using vimgrep.
@@ -237,7 +261,7 @@ let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 
 " Wordy.
-nnoremap <silent> K :NextWordy<cr>
+nnoremap <silent> K :NextWordy<CR>
 
 " Enable mouse support.
 if has('mouse')
