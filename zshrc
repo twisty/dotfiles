@@ -112,8 +112,3 @@ cat /usr/share/calendar/calendar* | grep "^`date +"%m/%d"`"
 
 export CLICOLOR=1;
 export LSCOLORS=gxcxfxexdxxxxxxxxxagag;
-
-export NVM_DIR="/home/tim/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-nvm use stable
