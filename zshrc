@@ -27,6 +27,10 @@ ZSH_THEME="twisty"
 plugins=(git osx vi-mode npm history-substring-search)
 source $ZSH/oh-my-zsh.sh
 
+if (( $+commands[nvim] )) ; then
+    alias vim=nvim
+fi
+
 ##
 # use 'dirs' to see the stack of past directories
 # use cd ~n to access stack
@@ -112,3 +116,5 @@ cat /usr/share/calendar/calendar* | grep "^`date +"%m/%d"`"
 
 export CLICOLOR=1;
 export LSCOLORS=gxcxfxexdxxxxxxxxxagag;
+
+nvm use stable

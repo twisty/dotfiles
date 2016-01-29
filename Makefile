@@ -10,6 +10,7 @@ install: uninstall defaults
 	ln -s $(CURDIR)/oh-my-zsh-custom $(HOME)/.oh-my-zsh-custom
 	ln -s $(CURDIR)/nanorc $(HOME)/.nanorc
 	ln -s $(CURDIR)/vimrc $(HOME)/.vimrc
+	ln -s $(CURDIR)/vimrc $(HOME)/.config/nvim/vim.init
 
 uninstall:
 	rm -f $(HOME)/.colordiffrc
@@ -23,6 +24,7 @@ uninstall:
 	rm -f $(HOME)/.oh-my-zsh-custom
 	rm -f $(HOME)/.nanorc
 	rm -f $(HOME)/.vimrc
+	rm -f $(HOME)/.config/nvim
 
 defaults:
 	git config --global color.ui true

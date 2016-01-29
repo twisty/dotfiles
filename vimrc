@@ -149,14 +149,16 @@ inoremap {{ {}<Left>
 
 set noswapfile
 
-" Copy the current text selection to the system clipboard
-" Note: this doesn’t work at the moment.
-if has('gui_running')
-  noremap <Leader>y "+y
-else
-  " Copy to attached terminal using the yank script:
-  " - https://github.com/sunaku/home/blob/master/bin/yank
-  noremap <Leader>y y:call system('~/.vim/osc52-yank.sh', @0)<CR>
+if !has('nvim')
+  " Copy the current text selection to the system clipboard
+  " Note: this doesn’t work at the moment.
+  if has('gui_running')
+    noremap <Leader>y "+y
+  else
+    " Copy to attached terminal using the yank script:
+    " - https://github.com/sunaku/home/blob/master/bin/yank
+    noremap <Leader>y y:call system('~/.vim/osc52-yank.sh', @0)<CR>
+  endif
 endif
 
 " Syntastic newbie settings.
@@ -264,15 +266,17 @@ let g:airline#extensions#syntastic#enabled = 1
 nnoremap <silent> K :NextWordy<CR>
 
 " Enable mouse support.
-if has('mouse')
-  set mouse=a
-  if has('mouse_sgr')
-    set ttymouse=sgr
-  else
-    set ttymouse=xterm2
+if !has('nvim')
+  if has('mouse')
+    set mouse=a
+    if has('mouse_sgr')
+      set ttymouse=sgr
+    else
+      set ttymouse=xterm2
+    endif
+    map <ScrollWheelUp> <C-Y>
+    map <ScrollWheelDown> <C-E>
   endif
-  map <ScrollWheelUp> <C-Y>
-  map <ScrollWheelDown> <C-E>
 endif
 
 " ... end incubating

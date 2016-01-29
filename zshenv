@@ -36,5 +36,3 @@ path=(~/Applications $path)
 # - https://github.com/creationix/nvm/issues/240#issuecomment-18800769
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-nvm use stable
