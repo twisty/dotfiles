@@ -24,6 +24,11 @@ if (( $+commands[composer] )) ; then
   path=(~/.composer/vendor/bin $path)
 fi
 
+# Docker
+if (( $+commands[docker-machine] )) ; then
+  eval $(docker-machine env)
+fi
+
 path=(~/local/bin $path)
 path=(~/Applications $path)
 
