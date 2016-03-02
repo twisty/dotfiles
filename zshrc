@@ -116,5 +116,3 @@ cat /usr/share/calendar/calendar* | grep "^`date +"%m/%d"`"
 
 export CLICOLOR=1;
 export LSCOLORS=gxcxfxexdxxxxxxxxxagag;
-
-nvm use stable
