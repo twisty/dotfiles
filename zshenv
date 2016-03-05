@@ -9,26 +9,6 @@ if [[ -a /opt/local/bin/port ]] ; then
   path=(/opt/local/bin /opt/local/sbin $path)
 fi
 
-# Macports apache
-if [[ -a /opt/local/apache2/bin/httpd ]] ; then
-  path=(/opt/local/apache2/bin $path)
-fi
-
-# Global node modules.
-if (( $+commands[npm] )) ; then
-  path=(~/local/node/bin $path)
-fi
-
-# Composer
-if (( $+commands[composer] )) ; then
-  path=(~/.composer/vendor/bin $path)
-fi
-
-# Docker
-if (( $+commands[docker-machine] )) ; then
-  eval $(docker-machine env)
-fi
-
 path=(~/local/bin $path)
 path=(~/Applications $path)
 
@@ -39,7 +19,7 @@ path=(~/Applications $path)
 
 # Setup nvm here, in zshenv, so it works with vim.
 # - https://github.com/creationix/nvm/issues/240#issuecomment-18800769
+# Be sure that there is a 'default' version in nvm:
+#     nvm alias default node
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-nvm use stable

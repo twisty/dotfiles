@@ -116,3 +116,19 @@ cat /usr/share/calendar/calendar* | grep "^`date +"%m/%d"`"
 
 export CLICOLOR=1;
 export LSCOLORS=gxcxfxexdxxxxxxxxxagag;
+
+# Macports apache
+if [[ -a /opt/local/apache2/bin/httpd ]] ; then
+  path=(/opt/local/apache2/bin $path)
+fi
+
+# Composer
+if (( $+commands[composer] )) ; then
+  path=(~/.composer/vendor/bin $path)
+fi
+
+# Docker
+if (( $+commands[docker-machine] )) ; then
+  eval $(docker-machine env)
+fi
+
