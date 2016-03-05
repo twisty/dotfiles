@@ -23,6 +23,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'reedes/vim-wordy'
 Plugin 'xsbeats/vim-blade'
+Plugin 'mtscout6/syntastic-local-eslint.vim'
 
 " <Leader>su
 Plugin 'vim-scripts/visSum.vim'
