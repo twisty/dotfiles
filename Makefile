@@ -1,4 +1,5 @@
 install: uninstall defaults
+	mkdir -p ~/.config/nvim
 	ln -s $(CURDIR)/colordiffrc $(HOME)/.colordiffrc
 	ln -s $(CURDIR)/editorconfig $(HOME)/.editorconfig
 	ln -s $(CURDIR)/gitexcludes $(HOME)/.gitexcludes
@@ -24,9 +25,12 @@ uninstall:
 	rm -f $(HOME)/.oh-my-zsh-custom
 	rm -f $(HOME)/.nanorc
 	rm -f $(HOME)/.vimrc
-	rm -f $(HOME)/.config/nvim
+	rm -f $(HOME)/.config/nvim/vim.init
 
 defaults:
 	git config --global color.ui true
-	git config --global color.diff.meta yellow black
+	git config --global color.diff.meta "yellow black"
 	git config --global core.excludesfile '~/.gitexcludes'
+	git config --global core.editor vim
+	git config --global credential.helper cache
+	git config --global credential.helper 'cache --timeout=3600'
