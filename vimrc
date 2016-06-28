@@ -23,7 +23,10 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'reedes/vim-wordy'
 Plugin 'xsbeats/vim-blade'
+Plugin 'niftylettuce/vim-jinja'
 Plugin 'mtscout6/syntastic-local-eslint.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
 " <Leader>su
 Plugin 'vim-scripts/visSum.vim'
@@ -153,6 +156,7 @@ map <Leader>b %
 inoremap (( ()<Left>
 inoremap [[ []<Left>
 inoremap {{ {}<Left>
+inoremap %% {%  %}<Left><Left><Left>
 
 set noswapfile
 
@@ -285,5 +289,10 @@ if !has('nvim')
     map <ScrollWheelDown> <C-E>
   endif
 endif
+
+" UtiliSnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
 " ... end incubating
