@@ -20,6 +20,7 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'pangloss/vim-javascript'
+Plugin 'elzr/vim-json'
 Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'reedes/vim-wordy'
 Plugin 'xsbeats/vim-blade'
@@ -106,9 +107,9 @@ inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
-" Claim .md files as Markdown
-" - https://github.com/tpope/vim-markdown
+" Claim filetypes;
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+" autocmd BufNewFile,BufReadPost *.json set filetype=json
 
 " Diagraph mappings.
 if has("digraphs")
