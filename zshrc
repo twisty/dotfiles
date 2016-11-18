@@ -1,11 +1,3 @@
-# Here to allow Ctrl-S in terminal
-# http://unix.stackexchange.com/a/72092
-stty -ixon
-
-if [ -e /lib/terminfo/x/xterm-256color ]; then
-    export TERM='xterm-256color'
-fi
-
 export PATH=$PATH
 export MANPATH=$MANPATH:/usr/local/share/man:/opt/local/share/man;
 export INFOPATH=$INFOPATH:/opt/local/share/info;
@@ -62,16 +54,12 @@ function svncdiff () {
 }
 
 ##
-# Complete ssh known hosts (from http://gentoo-wiki.com/TIP_Advanced_zsh_Completion)
+# Use known_hosts for hostname completion.
 #
-local _myhosts
-_myhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
-zstyle ':completion:*' hosts $_myhosts
-
-##
-# today
-#
-cat /usr/share/calendar/calendar* | grep "^`date +"%m/%d"`"
+if [ -f ~/.ssh/known_hosts ]; then
+    zstyle ':completion:*' hosts $( sed 's/[, ].*$//' $HOME/.ssh/known_hosts )
+    zstyle ':completion:*:*:(ssh|scp):*:*' hosts `sed 's/^\([^ ,]*\).*$/\1/' ~/.ssh/known_hosts`
+fi
 
 ##
 # Color ls.
@@ -117,11 +105,6 @@ cat /usr/share/calendar/calendar* | grep "^`date +"%m/%d"`"
 export CLICOLOR=1;
 export LSCOLORS=gxcxfxexdxxxxxxxxxagag;
 
-# Macports apache
-if [[ -a /opt/local/apache2/bin/httpd ]] ; then
-  path=(/opt/local/apache2/bin $path)
-fi
-
 # Composer
 if (( $+commands[composer] )) ; then
   path=(~/.composer/vendor/bin $path)
@@ -132,3 +115,6 @@ if (( $+commands[docker-machine] )) ; then
   eval $(docker-machine env)
 fi
 
+# nvm
+export NVM_DIR="/home/tim/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
