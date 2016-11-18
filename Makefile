@@ -32,5 +32,5 @@ defaults:
 	git config --global color.diff.meta "yellow black"
 	git config --global core.excludesfile '~/.gitexcludes'
 	git config --global core.editor vim
-	git config --global credential.helper cache
-	git config --global credential.helper 'cache --timeout=3600'
+	git config --global credential.helper store
+	git config --global push.default simple
