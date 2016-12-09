@@ -23,6 +23,10 @@ if (( $+commands[nvim] )) ; then
     alias vim=nvim
 fi
 
+if [[ -a ~/source/tmux/tmux-2.3/tmux ]] ; then
+    alias tmux='env TERM=xterm-256color ~/source/tmux/tmux-2.3/tmux'
+fi
+
 ##
 # use 'dirs' to see the stack of past directories
 # use cd ~n to access stack
@@ -114,7 +118,3 @@ fi
 if (( $+commands[docker-machine] )) ; then
   eval $(docker-machine env)
 fi
-
-# nvm
-export NVM_DIR="/home/tim/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
