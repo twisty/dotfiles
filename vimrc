@@ -19,7 +19,6 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'pangloss/vim-javascript'
 Plugin 'elzr/vim-json'
-Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'reedes/vim-wordy'
 Plugin 'xsbeats/vim-blade'
 Plugin 'niftylettuce/vim-jinja'
@@ -40,6 +39,7 @@ if has('nvim')
   Plugin 'benjie/neomake-local-eslint.vim'
 else
   Plugin 'tpope/vim-sensible'
+  Plugin 'ConradIrwin/vim-bracketed-paste'
   Plugin 'scrooloose/syntastic'
   Plugin 'mtscout6/syntastic-local-eslint.vim'
 endif
@@ -54,8 +54,6 @@ syntax enable
 " Remap leader key.
 let mapleader = ","
 
-"set t_Co=16
-
 if (has('termguicolors'))
   set termguicolors
 endif
@@ -66,12 +64,9 @@ else
   set background=dark
 endif
 
+" Gruvbox colorscheme
 let g:gruvbox_bold = 0
-
 colorscheme gruvbox
-
-" Invisible character colors.
-"highlight NonText ctermfg=240 guifg=#eee8d5
 
 " Use TextMate-style invisibles.
 set listchars=tab:▸\ ,eol:¬,trail:·
@@ -124,9 +119,32 @@ if has("digraphs")
   silent! dig -m 8212  " EM DASH (vim default is -M)
 endif
 
+" Slightly quicker brackets
+inoremap (( ()<Left>
+inoremap [[ []<Left>
+inoremap {{ {}<Left>
+inoremap %% {%  %}<Left><Left><Left>
+
+" Twiddle case. Hit ~ to cycle lower, capital, and titlecase.
+" - http://vim.wikia.com/wiki/Switching_case_of_characters
+function! TwiddleCase(str)
+  if a:str ==# toupper(a:str)
+    let result = tolower(a:str)
+  elseif a:str ==# tolower(a:str)
+    let result = substitute(a:str,'\(\<\w\+\>\)', '\u\1', 'g')
+  else
+    let result = toupper(a:str)
+  endif
+  return result
+endfunction
+vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
+
+" Cursor Tweaks
+" =============
+
 " Use a thin cursor shape when in insert mode.
+" - https://gist.github.com/andyfowler/1195581
 if !has('nvim')
-  " - https://gist.github.com/andyfowler/1195581
   if exists('$TMUX')
     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
     let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
@@ -135,12 +153,11 @@ if !has('nvim')
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
   endif
 else
-  " Cursor shape in nvim
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
 
 " Stop cursor blinking in normal mode.
-set gcr=n:blinkon0
+set guicursor+=n:blinkon0
 
 " Leader commands
 " ===============
@@ -157,16 +174,13 @@ vnoremap <Leader>e "hy:vimgrep "<C-r>h" **/*.* \| copen
 " b — Match bracket (easier to reach than %)
 map <Leader>b %
 
-" Incubating...
-" =============
-
-inoremap (( ()<Left>
-inoremap [[ []<Left>
-inoremap {{ {}<Left>
-inoremap %% {%  %}<Left><Left><Left>
+" w — Faster save
+nmap <leader>w :w!<cr>
 
 set noswapfile
 
+" Copy and paste
+" ==============
 if !has('nvim')
   " Copy the current text selection to the system clipboard
   " Note: this doesn’t work at the moment.
@@ -179,6 +193,8 @@ if !has('nvim')
   endif
 endif
 
+" Syntax checking
+" ===============
 if !has('nvim')
   " Syntastic newbie settings.
   " - https://github.com/scrooloose/syntastic#settings
@@ -202,20 +218,6 @@ else
   "let g:neomake_php_enabled_makers = ['php', 'phpcs']
   autocmd! BufWritePost * Neomake
 endif
-
-" Better twiddle case.
-" - http://vim.wikia.com/wiki/Switching_case_of_characters
-function! TwiddleCase(str)
-  if a:str ==# toupper(a:str)
-    let result = tolower(a:str)
-  elseif a:str ==# tolower(a:str)
-    let result = substitute(a:str,'\(\<\w\+\>\)', '\u\1', 'g')
-  else
-    let result = toupper(a:str)
-  endif
-  return result
-endfunction
-vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
 " Searching
 " =========
@@ -248,12 +250,6 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-
-" Use Ctrl-S for save.
-" - http://stackoverflow.com/a/3448551
-noremap <silent> <C-S> :update<CR>
-vnoremap <silent> <C-S> <C-C>:update<CR>
-inoremap <silent> <C-S> <C-O>:update<CR>
 
 " Smash keys to exit insert mode.
 inoremap jk <Esc>
@@ -302,10 +298,3 @@ if !has('nvim')
     map <ScrollWheelDown> <C-E>
   endif
 endif
-
-" UtiliSnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
-
-" ... end incubating
