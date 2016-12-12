@@ -10,28 +10,41 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'altercation/vim-colors-solarized'
+Plugin 'morhetz/gruvbox'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-vinegar'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/syntastic'
 Plugin 'pangloss/vim-javascript'
+Plugin 'elzr/vim-json'
 Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'reedes/vim-wordy'
 Plugin 'xsbeats/vim-blade'
-Plugin 'mtscout6/syntastic-local-eslint.vim'
 Plugin 'nelstrom/vim-markdown-folding'
 Plugin 'nginx.vim'
+Plugin 'niftylettuce/vim-jinja'
+
+Plugin 'MarcWeber/vim-addon-mw-utils' " Required by vim-snipmate
+Plugin 'tomtom/tlib_vim' " Required by vim-snipmate
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
 
 " <Leader>su
 Plugin 'vim-scripts/visSum.vim'
 
 " <Leader>ig
 Plugin 'nathanaelkane/vim-indent-guides'
+
+if has('nvim')
+  Plugin 'neomake/neomake'
+  Plugin 'benjie/neomake-local-eslint.vim'
+else
+  Plugin 'tpope/vim-sensible'
+  Plugin 'scrooloose/syntastic'
+  Plugin 'mtscout6/syntastic-local-eslint.vim'
+endif
 
 call vundle#end()
 filetype plugin indent on
@@ -43,7 +56,11 @@ syntax enable
 " Remap leader key.
 let mapleader = ","
 
-set t_Co=16
+"set t_Co=16
+
+if (has('termguicolors'))
+  set termguicolors
+endif
 
 if has('gui_running')
   set background=light
@@ -51,12 +68,12 @@ else
   set background=dark
 endif
 
-" Use solarized theme.
-" - http://ethanschoonover.com/solarized/vim-colors-solarized
-colorscheme solarized
+let g:gruvbox_bold = 0
+
+colorscheme gruvbox
 
 " Invisible character colors.
-highlight NonText ctermfg=240 guifg=#eee8d5
+"highlight NonText ctermfg=240 guifg=#eee8d5
 
 " Use TextMate-style invisibles.
 set listchars=tab:▸\ ,eol:¬,trail:·
@@ -87,12 +104,6 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 
-" Hide MacVim toolbar.
-set go-=T
-
-" Set font.
-set guifont=Menlo\ Regular:h13
-
 " Disable arrow keys.
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -105,8 +116,7 @@ inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
-" Claim .md files as Markdown
-" - https://github.com/tpope/vim-markdown
+" Claim filetypes;
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 " Diagraph mappings.
@@ -158,6 +168,7 @@ map <Leader>b %
 inoremap (( ()<Left>
 inoremap [[ []<Left>
 inoremap {{ {}<Left>
+inoremap %% {%  %}<Left><Left><Left>
 
 set noswapfile
 
@@ -173,23 +184,29 @@ if !has('nvim')
   endif
 endif
 
-" Syntastic newbie settings.
-" - https://github.com/scrooloose/syntastic#settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+if !has('nvim')
+  " Syntastic newbie settings.
+  " - https://github.com/scrooloose/syntastic#settings
+  set statusline+=%#warningmsg#
+  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_auto_loc_list = 1
+  let g:syntastic_check_on_open = 1
+  let g:syntastic_check_on_wq = 0
 
-" Syntastic Javascript linter.
-let g:syntastic_javascript_checkers = ['eslint']
+  " Syntastic Javascript linter.
+  let g:syntastic_javascript_checkers = ['eslint']
 
-" Syntastic PHP code sniffer.
-let g:syntastic_php_checkers = ['php', 'phpcs']
-let g:syntastic_php_phpcs_args = "-n --report=csv"
+  " Syntastic PHP code sniffer.
+  let g:syntastic_php_checkers = ['php', 'phpcs']
+  let g:syntastic_php_phpcs_args = "-n --report=csv"
+else
+  "let g:neomake_javascript_enabled_makers = ['eslint']
+  "let g:neomake_php_enabled_makers = ['php', 'phpcs']
+  autocmd! BufWritePost * Neomake
+endif
 
 " Better twiddle case.
 " - http://vim.wikia.com/wiki/Switching_case_of_characters
@@ -271,8 +288,8 @@ let g:airline_symbols.linenr = '¶'
 let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.whitespace = 'Ξ'
-let g:airline#extensions#whitespace#enabled = 1
-let g:airline#extensions#syntastic#enabled = 1
+"let g:airline#extensions#whitespace#enabled = 1
+"let g:airline#extensions#syntastic#enabled = 1
 
 " Wordy.
 nnoremap <silent> K :NextWordy<CR>
@@ -290,5 +307,10 @@ if !has('nvim')
     map <ScrollWheelDown> <C-E>
   endif
 endif
+
+" UtiliSnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
 " ... end incubating

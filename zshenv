@@ -3,12 +3,7 @@
 
 path=(/usr/bin /bin /usr/sbin /sbin)
 path=(/usr/local/bin /usr/local/sbin $path)
-
-# Macports
-if [[ -a /opt/local/bin/port ]] ; then
-  path=(/opt/local/bin /opt/local/sbin $path)
-fi
-
+path=(~/.local/bin $path)
 path=(~/local/bin $path)
 path=(~/Applications $path)
 
