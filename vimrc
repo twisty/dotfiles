@@ -24,6 +24,8 @@ Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'reedes/vim-wordy'
 Plugin 'xsbeats/vim-blade'
 Plugin 'mtscout6/syntastic-local-eslint.vim'
+Plugin 'nelstrom/vim-markdown-folding'
+Plugin 'nginx.vim'
 
 " <Leader>su
 Plugin 'vim-scripts/visSum.vim'
@@ -139,7 +141,10 @@ set gcr=n:blinkon0
 nnoremap <Leader>a ggVG
 
 " hs — Toggle search highlighting.
-noremap <Leader>hs :set hlsearch! hlsearch?<CR>
+nnoremap <Leader>hs :set hlsearch! hlsearch?<CR>
+
+" c/ — Show a count of search results
+nnoremap <Leader>c/ :%s/<C-r>// /gn<CR>
 
 " e — Find the visual selection using vimgrep: http://qr.ae/TSdv6
 vnoremap <Leader>e "hy:vimgrep "<C-r>h" **/*.* \| copen
