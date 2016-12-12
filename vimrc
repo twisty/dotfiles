@@ -21,6 +21,8 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'elzr/vim-json'
 Plugin 'reedes/vim-wordy'
 Plugin 'xsbeats/vim-blade'
+Plugin 'nelstrom/vim-markdown-folding'
+Plugin 'nginx.vim'
 Plugin 'niftylettuce/vim-jinja'
 
 Plugin 'MarcWeber/vim-addon-mw-utils' " Required by vim-snipmate
@@ -166,7 +168,10 @@ set guicursor+=n:blinkon0
 nnoremap <Leader>a ggVG
 
 " hs — Toggle search highlighting.
-noremap <Leader>hs :set hlsearch! hlsearch?<CR>
+nnoremap <Leader>hs :set hlsearch! hlsearch?<CR>
+
+" c/ — Show a count of search results
+nnoremap <Leader>c/ :%s/<C-r>// /gn<CR>
 
 " e — Find the visual selection using vimgrep: http://qr.ae/TSdv6
 vnoremap <Leader>e "hy:vimgrep "<C-r>h" **/*.* \| copen
