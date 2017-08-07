@@ -18,7 +18,6 @@ Plugin 'tpope/vim-vinegar'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'pangloss/vim-javascript'
-Plugin 'elzr/vim-json'
 Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'reedes/vim-wordy'
 Plugin 'xsbeats/vim-blade'
@@ -30,6 +29,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils' " Required by vim-snipmate
 Plugin 'tomtom/tlib_vim' " Required by vim-snipmate
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
+Plugin 'w0rp/ale'
 
 " <Leader>su
 Plugin 'vim-scripts/visSum.vim'
@@ -38,12 +38,8 @@ Plugin 'vim-scripts/visSum.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
 
 if has('nvim')
-  Plugin 'neomake/neomake'
-  Plugin 'benjie/neomake-local-eslint.vim'
 else
   Plugin 'tpope/vim-sensible'
-  Plugin 'scrooloose/syntastic'
-  Plugin 'mtscout6/syntastic-local-eslint.vim'
 endif
 
 call vundle#end()
@@ -182,30 +178,6 @@ if !has('nvim')
     " - https://github.com/sunaku/home/blob/master/bin/yank
     noremap <Leader>y y:call system('~/.vim/osc52-yank.sh', @0)<CR>
   endif
-endif
-
-if !has('nvim')
-  " Syntastic newbie settings.
-  " - https://github.com/scrooloose/syntastic#settings
-  set statusline+=%#warningmsg#
-  set statusline+=%{SyntasticStatuslineFlag()}
-  set statusline+=%*
-
-  let g:syntastic_always_populate_loc_list = 1
-  let g:syntastic_auto_loc_list = 1
-  let g:syntastic_check_on_open = 1
-  let g:syntastic_check_on_wq = 0
-
-  " Syntastic Javascript linter.
-  let g:syntastic_javascript_checkers = ['eslint']
-
-  " Syntastic PHP code sniffer.
-  let g:syntastic_php_checkers = ['php', 'phpcs']
-  let g:syntastic_php_phpcs_args = "-n --report=csv"
-else
-  "let g:neomake_javascript_enabled_makers = ['eslint']
-  "let g:neomake_php_enabled_makers = ['php', 'phpcs']
-  autocmd! BufWritePost * Neomake
 endif
 
 " Better twiddle case.
