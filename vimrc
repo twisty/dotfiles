@@ -18,12 +18,13 @@ Plugin 'tpope/vim-vinegar'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'pangloss/vim-javascript'
-Plugin 'elzr/vim-json'
+Plugin 'mxw/vim-jsx'
 Plugin 'reedes/vim-wordy'
 Plugin 'xsbeats/vim-blade'
 Plugin 'nelstrom/vim-markdown-folding'
 Plugin 'nginx.vim'
 Plugin 'niftylettuce/vim-jinja'
+Plugin 'airblade/vim-gitgutter'
 
 Plugin 'MarcWeber/vim-addon-mw-utils' " Required by vim-snipmate
 Plugin 'tomtom/tlib_vim' " Required by vim-snipmate
@@ -38,7 +39,7 @@ Plugin 'nathanaelkane/vim-indent-guides'
 
 if has('nvim')
   Plugin 'neomake/neomake'
-  Plugin 'benjie/neomake-local-eslint.vim'
+  Plugin 'jaawerth/nrun.vim'
 else
   Plugin 'tpope/vim-sensible'
   Plugin 'ConradIrwin/vim-bracketed-paste'
@@ -56,6 +57,8 @@ syntax enable
 " Remap leader key.
 let mapleader = ","
 
+set noswapfile
+
 if (has('termguicolors'))
   set termguicolors
 endif
@@ -68,6 +71,7 @@ endif
 
 " Gruvbox colorscheme
 let g:gruvbox_bold = 0
+let g:gruvbox_underline = 0
 colorscheme gruvbox
 
 " Use TextMate-style invisibles.
@@ -180,9 +184,14 @@ vnoremap <Leader>e "hy:vimgrep "<C-r>h" **/*.* \| copen
 map <Leader>b %
 
 " w — Faster save
-nmap <leader>w :w!<cr>
+nmap <leader>w :w!<CR>
 
-set noswapfile
+" wm — Toggle writing mode.
+nmap <leader>wm :set list!<CR>:set number!<CR>
+
+" Use alt key for inc/deincrement numbers because C-a conflict with my Tmux setup.
+nnoremap <A-a> <C-a>
+nnoremap <A-x> <C-x>
 
 " Copy and paste
 " ==============
@@ -221,6 +230,15 @@ if !has('nvim')
 else
   "let g:neomake_javascript_enabled_makers = ['eslint']
   "let g:neomake_php_enabled_makers = ['php', 'phpcs']
+  autocmd BufEnter *.js let b:neomake_javascript_eslint_exe = nrun#Which('eslint')
+  autocmd BufEnter *.css call SetCSSOptions()
+  autocmd BufEnter *.scss call SetCSSOptions()
+  function SetCSSOptions()
+    let b:neomake_css_enabled_makers = ['stylelint']
+    let b:neomake_scss_enabled_makers = ['stylelint']
+    let b:neomake_css_stylelint_exe = nrun#Which('stylelint')
+    let b:neomake_scss_stylelint_exe = nrun#Which('stylelint')
+  endfunction
   autocmd! BufWritePost * Neomake
 endif
 
@@ -245,6 +263,14 @@ vnoremap <Leader>e "hy:vimgrep "<C-r>h" **/*.* \| copen
 
 " Visual select most recently edited text.
 nnoremap gV `[v`]
+
+" Navigate buffers
+nnoremap bn :bn<CR>
+nnoremap bp :bp<CR>
+nnoremap b# :b#<CR>
+
+" Search into subfolders
+set path+=**
 
 " Configure OmniCompletion.
 filetype plugin on
@@ -287,19 +313,24 @@ let g:airline_symbols.whitespace = 'Ξ'
 "let g:airline#extensions#whitespace#enabled = 1
 "let g:airline#extensions#syntastic#enabled = 1
 
+call airline#parts#define_accent('mode', 'none')
+let g:airline_section_z = '%3P'
+
 " Wordy.
 nnoremap <silent> K :NextWordy<CR>
 
-" Enable mouse support.
-if !has('nvim')
-  if has('mouse')
-    set mouse=a
-    if has('mouse_sgr')
-      set ttymouse=sgr
-    else
-      set ttymouse=xterm2
-    endif
-    map <ScrollWheelUp> <C-Y>
-    map <ScrollWheelDown> <C-E>
-  endif
-endif
+" Move text blocks.
+" - https://dockyard.com/blog/2013/09/26/vim-moving-lines-aint-hard
+
+" Normal mode
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+
+" Insert mode
+" Disabled for now as I'm used to <C-k> for entering digraphs.
+"inoremap <C-j> <ESC>:m .+1<CR>==gi
+"inoremap <C-k> <ESC>:m .-2<CR>==gi
+
+" Visual mode
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv”
