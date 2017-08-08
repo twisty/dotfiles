@@ -30,6 +30,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils' " Required by vim-snipmate
 Plugin 'tomtom/tlib_vim' " Required by vim-snipmate
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
+Plugin 'w0rp/ale'
 
 " <Leader>su
 Plugin 'vim-scripts/visSum.vim'
@@ -37,14 +38,9 @@ Plugin 'vim-scripts/visSum.vim'
 " <Leader>ig
 Plugin 'nathanaelkane/vim-indent-guides'
 
-if has('nvim')
-  Plugin 'neomake/neomake'
-  Plugin 'jaawerth/nrun.vim'
-else
+if !has('nvim')
   Plugin 'tpope/vim-sensible'
   Plugin 'ConradIrwin/vim-bracketed-paste'
-  Plugin 'scrooloose/syntastic'
-  Plugin 'mtscout6/syntastic-local-eslint.vim'
 endif
 
 call vundle#end()
@@ -207,40 +203,19 @@ if !has('nvim')
   endif
 endif
 
-" Syntax checking
-" ===============
-if !has('nvim')
-  " Syntastic newbie settings.
-  " - https://github.com/scrooloose/syntastic#settings
-  set statusline+=%#warningmsg#
-  set statusline+=%{SyntasticStatuslineFlag()}
-  set statusline+=%*
-
-  let g:syntastic_always_populate_loc_list = 1
-  let g:syntastic_auto_loc_list = 1
-  let g:syntastic_check_on_open = 1
-  let g:syntastic_check_on_wq = 0
-
-  " Syntastic Javascript linter.
-  let g:syntastic_javascript_checkers = ['eslint']
-
-  " Syntastic PHP code sniffer.
-  let g:syntastic_php_checkers = ['php', 'phpcs']
-  let g:syntastic_php_phpcs_args = "-n --report=csv"
-else
-  "let g:neomake_javascript_enabled_makers = ['eslint']
-  "let g:neomake_php_enabled_makers = ['php', 'phpcs']
-  autocmd BufEnter *.js let b:neomake_javascript_eslint_exe = nrun#Which('eslint')
-  autocmd BufEnter *.css call SetCSSOptions()
-  autocmd BufEnter *.scss call SetCSSOptions()
-  function SetCSSOptions()
-    let b:neomake_css_enabled_makers = ['stylelint']
-    let b:neomake_scss_enabled_makers = ['stylelint']
-    let b:neomake_css_stylelint_exe = nrun#Which('stylelint')
-    let b:neomake_scss_stylelint_exe = nrun#Which('stylelint')
-  endfunction
-  autocmd! BufWritePost * Neomake
-endif
+" Better twiddle case.
+" - http://vim.wikia.com/wiki/Switching_case_of_characters
+function! TwiddleCase(str)
+  if a:str ==# toupper(a:str)
+    let result = tolower(a:str)
+  elseif a:str ==# tolower(a:str)
+    let result = substitute(a:str,'\(\<\w\+\>\)', '\u\1', 'g')
+  else
+    let result = toupper(a:str)
+  endif
+  return result
+endfunction
+vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
 " Searching
 " =========
