@@ -25,7 +25,7 @@ uninstall:
 	rm -f $(HOME)/.oh-my-zsh-custom
 	rm -f $(HOME)/.nanorc
 	rm -f $(HOME)/.vimrc
-	rm -f $(HOME)/.config/nvim/vim.init
+	rm -f $(HOME)/.config/nvim/init.vim
 
 defaults:
 	git config --global color.ui true
