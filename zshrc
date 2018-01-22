@@ -16,8 +16,9 @@ export LC_CTYPE=en_US.UTF-8
 ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="twisty"
-plugins=(git osx vi-mode npm history-substring-search)
+plugins=(git osx vi-mode npm history-substring-search zsh-completions)
 source $ZSH/oh-my-zsh.sh
+autoload -U compinit && compinit
 
 if (( $+commands[nvim] )) ; then
     alias vim=nvim
@@ -109,12 +110,16 @@ fi
 export CLICOLOR=1;
 export LSCOLORS=gxcxfxexdxxxxxxxxxagag;
 
+##
 # Composer
+#
 if (( $+commands[composer] )) ; then
   path=(~/.composer/vendor/bin $path)
 fi
 
+##
 # Docker
-if (( $+commands[docker-machine] )) ; then
-  eval $(docker-machine env)
-fi
+#
+# if (( $+commands[docker-machine] )) ; then
+#  eval $(docker-machine env)
+# fi
