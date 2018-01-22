@@ -11,7 +11,6 @@ export EDITOR=vim
 export LC_CTYPE=en_US.UTF-8
 
 # oh-my-zsh configuration.
-ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="twisty"
 plugins=(git osx vi-mode npm history-substring-search zsh-completions)
