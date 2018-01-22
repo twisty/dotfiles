@@ -1,4 +1,4 @@
-export PATH=$PATH
+#export PATH=$PATH
 export MANPATH=$MANPATH:/usr/local/share/man:/opt/local/share/man;
 export INFOPATH=$INFOPATH:/opt/local/share/info;
 
@@ -7,8 +7,6 @@ export HISTFILE=~/.zsh_history
 export SAVEHIST=200
 
 export EDITOR=vim
-export SVN_EDITOR=vim
-export VIM_APP_DIR=/Applications/MacVim
 
 export LC_CTYPE=en_US.UTF-8
 
@@ -16,12 +14,8 @@ export LC_CTYPE=en_US.UTF-8
 ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="twisty"
-plugins=(git osx vi-mode npm history-substring-search)
+plugins=(git osx vi-mode npm history-substring-search ssh-agent)
 source $ZSH/oh-my-zsh.sh
-
-if (( $+commands[nvim] )) ; then
-    alias vim=nvim
-fi
 
 if [[ -a ~/source/tmux/tmux-2.3/tmux ]] ; then
     alias tmux='env TERM=xterm-256color ~/source/tmux/tmux-2.3/tmux'
@@ -38,24 +32,9 @@ setopt auto_pushd
 #
 alias ll='ls -laG'
 alias '..'='cd ..'
-alias svnst='svn status --ignore-externals'
 alias fsize='du -hc -d 0'
-alias download='wget \
---wait=2 \
---random-wait \
---html-extension \
---recursive \
---level=1 \
---page-requisites \
---convert-links \
---backup-converted'
-
-##
-# Subversion colour diff
-#
-function svncdiff () {
-    svn diff $@ | colordiff | less -R;
-}
+alias cls='clear'
+alias start-ssh-agent='eval "$(ssh-agent -s)";ssh-add'
 
 ##
 # Use known_hosts for hostname completion.
@@ -65,49 +44,13 @@ if [ -f ~/.ssh/known_hosts ]; then
     zstyle ':completion:*:*:(ssh|scp):*:*' hosts `sed 's/^\([^ ,]*\).*$/\1/' ~/.ssh/known_hosts`
 fi
 
-##
-# Color ls.
-# http://creativebits.org/enable_ls_colors_in_tiger
-#
-#       a   black
-#       b   red
-#       c   green
-#       d   brown
-#       e   blue
-#       f   magenta
-#       g   cyan
-#       h   light grey
-#       A   bold black, usually shows up as dark grey
-#       B   bold red
-#       C   bold green
-#       D   bold brown, usually shows up as yellow
-#       E   bold blue
-#       F   bold magenta
-#       G   bold cyan
-#       H   bold light grey; looks like bright white
-#       x   default foreground or background
-# 
-# Note that the above are standard ANSI colors.  The actual
-# display may differ depending on the color capabilities of
-# the terminal in use.
-# 
-# The order of the attributes are as follows:
-# 
-#       1.  directory
-#       2.  symbolic link
-#       3.  socket
-#       4.  pipe
-#       5.  executable
-#       6.  block special
-#       7.  character special
-#       8.  executable with setuid bit set
-#       9.  executable with setgid bit set
-#       10. directory writable to others, with sticky bit
-#       11. directory writable to others, without sticky
-#           bit
+# "Command exists" pattern:
+#     http://www.zsh.org/mla/users/2011/msg00070.html
 
-export CLICOLOR=1;
-export LSCOLORS=gxcxfxexdxxxxxxxxxagag;
+# neovim
+if (( $+commands[nvim] )) ; then
+    alias vim=nvim
+fi
 
 # Composer
 if (( $+commands[composer] )) ; then
