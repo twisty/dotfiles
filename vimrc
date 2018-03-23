@@ -1,3 +1,5 @@
+"set shell=zsh\ -l
+
 " Vundle...
 " =========
 
@@ -8,32 +10,24 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'morhetz/gruvbox'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-vinegar'
-Plugin 'editorconfig/editorconfig-vim'
+"Plugin 'editorconfig/editorconfig-vim'
+Plugin 'sgur/vim-editorconfig'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'reedes/vim-wordy'
-Plugin 'xsbeats/vim-blade'
 Plugin 'nelstrom/vim-markdown-folding'
 Plugin 'nginx.vim'
-Plugin 'niftylettuce/vim-jinja'
-Plugin 'airblade/vim-gitgutter'
+"Plugin 'airblade/vim-gitgutter'
 
-Plugin 'MarcWeber/vim-addon-mw-utils' " Required by vim-snipmate
-Plugin 'tomtom/tlib_vim' " Required by vim-snipmate
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
 Plugin 'w0rp/ale'
-
-" <Leader>su
-Plugin 'vim-scripts/visSum.vim'
 
 " <Leader>ig
 Plugin 'nathanaelkane/vim-indent-guides'
@@ -93,10 +87,10 @@ endif
 " Keep three lines visible above and below.
 set scrolloff=3
 
-" Use four spaces for tabs.
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+" Use two spaces for tabs.
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 
 " Disable arrow keys.
@@ -111,8 +105,12 @@ inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
-" Claim filetypes;
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+" Claim custom filetypes.
+augroup vimrc_custom_filetypes
+  autocmd!
+  autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+  autocmd BufNewFile,BufRead *.mjml set filetype=xml
+augroup END
 
 " Diagraph mappings.
 if has("digraphs")
@@ -155,11 +153,11 @@ if !has('nvim')
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
   endif
 else
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+  set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 endif
 
 " Stop cursor blinking in normal mode.
-set guicursor+=n:blinkon0
+" set guicursor+=n:blinkon0
 
 " Leader commands
 " ===============
@@ -203,20 +201,6 @@ if !has('nvim')
   endif
 endif
 
-" Better twiddle case.
-" - http://vim.wikia.com/wiki/Switching_case_of_characters
-function! TwiddleCase(str)
-  if a:str ==# toupper(a:str)
-    let result = tolower(a:str)
-  elseif a:str ==# tolower(a:str)
-    let result = substitute(a:str,'\(\<\w\+\>\)', '\u\1', 'g')
-  else
-    let result = toupper(a:str)
-  endif
-  return result
-endfunction
-vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
-
 " Searching
 " =========
 set ignorecase
@@ -251,11 +235,14 @@ set path+=**
 filetype plugin on
 set completeopt=menu,menuone,preview,longest
 set omnifunc=syntaxcomplete#Complete
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+augroup vimrc_omnifunc
+  autocmd!
+  autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+  autocmd FileType python set omnifunc=pythoncomplete#Complete
+  autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+augroup END
 
 " Smash keys to exit insert mode.
 inoremap jk <Esc>
@@ -263,33 +250,35 @@ inoremap kj <Esc>
 
 " Airline.
 " - https://github.com/bling/vim-airline
-let g:airline_mode_map = {
-    \ '__' : '-',
-    \ 'n'  : 'N',
-    \ 'i'  : 'I',
-    \ 'R'  : 'R',
-    \ 'c'  : 'C',
-    \ 'v'  : 'V',
-    \ 'V'  : 'VL',
-    \ '' : 'VB',
-    \ 's'  : 'S',
-    \ 'S'  : 'S',
-    \ '' : 'S',
-    \ }
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
+if exists(':AirlineTheme')
+  let g:airline_mode_map = {
+      \ '__' : '-',
+      \ 'n'  : 'N',
+      \ 'i'  : 'I',
+      \ 'R'  : 'R',
+      \ 'c'  : 'C',
+      \ 'v'  : 'V',
+      \ 'V'  : 'VL',
+      \ '' : 'VB',
+      \ 's'  : 'S',
+      \ 'S'  : 'S',
+      \ '' : 'S',
+      \ }
+  let g:airline_left_sep = ''
+  let g:airline_right_sep = ''
+  if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+  endif
+  let g:airline_symbols.linenr = '¶'
+  let g:airline_symbols.branch = '⎇'
+  let g:airline_symbols.paste = 'ρ'
+  let g:airline_symbols.whitespace = 'Ξ'
+  "let g:airline#extensions#whitespace#enabled = 1
+  "let g:airline#extensions#syntastic#enabled = 1
+  
+  call airline#parts#define_accent('mode', 'none')
+  let g:airline_section_z = '%3P'
 endif
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.whitespace = 'Ξ'
-"let g:airline#extensions#whitespace#enabled = 1
-"let g:airline#extensions#syntastic#enabled = 1
-
-call airline#parts#define_accent('mode', 'none')
-let g:airline_section_z = '%3P'
 
 " Wordy.
 nnoremap <silent> K :NextWordy<CR>
@@ -309,3 +298,11 @@ nnoremap <C-k> :m .-2<CR>==
 " Visual mode
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv”
+
+let g:ale_linters = {}
+let g:ale_linters['javascript'] = ['eslint', 'flow']
+let g:ale_linters['text'] = ['proselint']
+let g:ale_linters['php'] = ['php']
+
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['eslint']
