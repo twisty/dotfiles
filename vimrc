@@ -152,12 +152,7 @@ if !has('nvim')
     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
   endif
-else
-  set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
 endif
-
-" Stop cursor blinking in normal mode.
-" set guicursor+=n:blinkon0
 
 " Leader commands
 " ===============
@@ -291,6 +286,10 @@ let g:ale_linters['php'] = ['php']
 
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['eslint']
+
+if exists(':AirlineTheme')
+  let g:airline#extensions#ale#enabled = 1
+endif
 
 " Move text blocks.
 " - https://dockyard.com/blog/2013/09/26/vim-moving-lines-aint-hard
