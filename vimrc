@@ -275,13 +275,22 @@ if exists(':AirlineTheme')
   let g:airline_symbols.whitespace = 'Ξ'
   "let g:airline#extensions#whitespace#enabled = 1
   "let g:airline#extensions#syntastic#enabled = 1
-  
+
   call airline#parts#define_accent('mode', 'none')
   let g:airline_section_z = '%3P'
 endif
 
 " Wordy.
 nnoremap <silent> K :NextWordy<CR>
+
+" ALE
+let g:ale_linters = {}
+let g:ale_linters['javascript'] = ['eslint', 'flow']
+let g:ale_linters['text'] = ['proselint']
+let g:ale_linters['php'] = ['php']
+
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['eslint']
 
 " Move text blocks.
 " - https://dockyard.com/blog/2013/09/26/vim-moving-lines-aint-hard
@@ -297,12 +306,3 @@ nnoremap <C-k> :m .-2<CR>==
 
 " Visual mode
 vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv”
-
-let g:ale_linters = {}
-let g:ale_linters['javascript'] = ['eslint', 'flow']
-let g:ale_linters['text'] = ['proselint']
-let g:ale_linters['php'] = ['php']
-
-let g:ale_fixers = {}
-let g:ale_fixers['javascript'] = ['eslint']
