@@ -308,4 +308,4 @@ nnoremap <C-k> :m .-2<CR>==
 
 " Visual mode
 vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv”
+vnoremap <C-k> :m '<-2<CR>gv=gv
