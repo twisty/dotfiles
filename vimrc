@@ -17,17 +17,17 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-vinegar'
-"Plugin 'editorconfig/editorconfig-vim'
 Plugin 'sgur/vim-editorconfig'
-Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-commentary'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'StanAngeloff/php.vim'
 Plugin 'reedes/vim-wordy'
+Plugin 'chr4/nginx.vim'
 Plugin 'nelstrom/vim-markdown-folding'
-Plugin 'nginx.vim'
 "Plugin 'airblade/vim-gitgutter'
-
 Plugin 'w0rp/ale'
+Plugin 'ludovicchabant/vim-gutentags'
 
 " <Leader>ig
 Plugin 'nathanaelkane/vim-indent-guides'
@@ -232,12 +232,22 @@ set completeopt=menu,menuone,preview,longest
 set omnifunc=syntaxcomplete#Complete
 augroup vimrc_omnifunc
   autocmd!
-  autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-  autocmd FileType python set omnifunc=pythoncomplete#Complete
-  autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+  autocmd FileType php        setlocal omnifunc=phpcomplete#CompletePHP
+  autocmd FileType python     setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType html       setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType css        setlocal omnifunc=csscomplete#CompleteCSS
 augroup END
+
+let g:gutentags_ctags_exclude = [
+  \ '.git',
+  \ 'build',
+  \ 'var',
+  \ '*.min.js',
+  \ '*.min.css',
+  \ '*.phar',
+  \ '*.ini'
+  \ ]
 
 " Smash keys to exit insert mode.
 inoremap jk <Esc>
@@ -247,18 +257,18 @@ inoremap kj <Esc>
 " - https://github.com/bling/vim-airline
 if exists(':AirlineTheme')
   let g:airline_mode_map = {
-      \ '__' : '-',
-      \ 'n'  : 'N',
-      \ 'i'  : 'I',
-      \ 'R'  : 'R',
-      \ 'c'  : 'C',
-      \ 'v'  : 'V',
-      \ 'V'  : 'VL',
-      \ '' : 'VB',
-      \ 's'  : 'S',
-      \ 'S'  : 'S',
-      \ '' : 'S',
-      \ }
+    \ '__' : '-',
+    \ 'n'  : 'N',
+    \ 'i'  : 'I',
+    \ 'R'  : 'R',
+    \ 'c'  : 'C',
+    \ 'v'  : 'V',
+    \ 'V'  : 'VL',
+    \ '' : 'VB',
+    \ 's'  : 'S',
+    \ 'S'  : 'S',
+    \ '' : 'S',
+    \ }
   let g:airline_left_sep = ''
   let g:airline_right_sep = ''
   if !exists('g:airline_symbols')
