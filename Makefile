@@ -1,4 +1,5 @@
 install: uninstall defaults
+	ln -s $(CURDIR)/bash_aliases      $(HOME)/.bash_aliases
 	ln -s $(CURDIR)/colordiffrc       $(HOME)/.colordiffrc
 	ln -s $(CURDIR)/editorconfig      $(HOME)/.editorconfig
 	ln -s $(CURDIR)/gitexcludes       $(HOME)/.gitexcludes
@@ -10,6 +11,7 @@ install: uninstall defaults
 	ln -s $(CURDIR)/gruvbox.dircolors $(HOME)/.dircolors
 
 uninstall:
+	rm -f $(HOME)/.bash_aliases
 	rm -f $(HOME)/.colordiffrc
 	rm -f $(HOME)/.editorconfig
 	rm -f $(HOME)/.gitexcludes
