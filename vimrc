@@ -1,4 +1,5 @@
 "set shell=zsh\ -l
+set shell=bash
 
 " Vundle...
 " =========
@@ -19,15 +20,20 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-vinegar'
 Plugin 'sgur/vim-editorconfig'
 Plugin 'tpope/vim-commentary'
+Plugin 'reedes/vim-wordy'
+Plugin 'nelstrom/vim-markdown-folding'
+Plugin 'w0rp/ale'
+"Plugin 'ludovicchabant/vim-gutentags'
+Plugin 't9md/vim-textmanip'
+Plugin 'chrisbra/unicode.vim'
+
+" Language syntaxes
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'lumiliet/vim-twig'
 Plugin 'StanAngeloff/php.vim'
-Plugin 'reedes/vim-wordy'
 Plugin 'chr4/nginx.vim'
-Plugin 'nelstrom/vim-markdown-folding'
-"Plugin 'airblade/vim-gitgutter'
-Plugin 'w0rp/ale'
-Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'jeroenbourgois/vim-actionscript'
 
 " <Leader>ig
 Plugin 'nathanaelkane/vim-indent-guides'
@@ -43,6 +49,9 @@ filetype plugin indent on
 " ...end Vundle
 
 syntax enable
+
+" Enable mouse
+set mouse=a
 
 " Remap leader key.
 let mapleader = ","
@@ -69,9 +78,6 @@ set listchars=tab:▸\ ,eol:¬,trail:·
 
 " Show line numbers.
 set number
-
-" <Leader>n — Toggle relative line numbering.
-nnoremap <Leader>n :set relativenumber!<CR>
 
 " Show invisibles.
 set list
@@ -125,6 +131,9 @@ inoremap [[ []<Left>
 inoremap {{ {}<Left>
 inoremap %% {%  %}<Left><Left><Left>
 
+" Smart apostrophe
+inoremap 's<Space> ’s<Space>
+
 " Twiddle case. Hit ~ to cycle lower, capital, and titlecase.
 " - http://vim.wikia.com/wiki/Switching_case_of_characters
 function! TwiddleCase(str)
@@ -163,20 +172,26 @@ nnoremap <Leader>a ggVG
 " hs — Toggle search highlighting.
 nnoremap <Leader>hs :set hlsearch! hlsearch?<CR>
 
-" c/ — Show a count of search results
+" c/ — Show a count of search results.
 nnoremap <Leader>c/ :%s/<C-r>// /gn<CR>
 
 " e — Find the visual selection using vimgrep: http://qr.ae/TSdv6
 vnoremap <Leader>e "hy:vimgrep "<C-r>h" **/*.* \| copen
 
-" b — Match bracket (easier to reach than %)
+" b — Match bracket (easier to reach than %).
 map <Leader>b %
 
-" w — Faster save
-nmap <leader>w :w!<CR>
+" w — Faster save.
+nmap <Leader>w :w!<CR>
 
-" wm — Toggle writing mode.
-nmap <leader>wm :set list!<CR>:set number!<CR>
+" wm — Enter writing mode.
+nmap <Leader>wm :set nolist nonumber spell foldcolumn=10<CR>
+
+" cm — Enter coding mode.
+nmap <Leader>cm :set list number nospell foldcolumn=0<CR>
+
+" n — Toggle relative line numbering.
+nnoremap <Leader>n :set relativenumber!<CR>
 
 " Use alt key for inc/deincrement numbers because C-a conflict with my Tmux setup.
 nnoremap <A-a> <C-a>
@@ -302,16 +317,7 @@ if exists(':AirlineTheme')
 endif
 
 " Move text blocks.
-" - https://dockyard.com/blog/2013/09/26/vim-moving-lines-aint-hard
-
-" Normal mode
-nnoremap <C-j> :m .+1<CR>==
-nnoremap <C-k> :m .-2<CR>==
-
-" Insert mode
-" Disabled for now as I'm used to <C-k> for entering digraphs.
-"inoremap <C-j> <ESC>:m .+1<CR>==gi
-"inoremap <C-k> <ESC>:m .-2<CR>==gi
-
-" Visual mode
-vnoremap <C-j> :m '>+1<CR>gv=gv
+xmap <C-j> <Plug>(textmanip-move-down)
+xmap <C-k> <Plug>(textmanip-move-up)
+xmap <C-h> <Plug>(textmanip-move-left)
+xmap <C-l> <Plug>(textmanip-move-right)
