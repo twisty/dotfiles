@@ -1,5 +1,4 @@
 install: uninstall defaults
-	mkdir -p ~/.config/nvim
 	ln -s $(CURDIR)/colordiffrc       $(HOME)/.colordiffrc
 	ln -s $(CURDIR)/editorconfig      $(HOME)/.editorconfig
 	ln -s $(CURDIR)/gitexcludes       $(HOME)/.gitexcludes
@@ -8,8 +7,6 @@ install: uninstall defaults
 	ln -s $(CURDIR)/zshrc             $(HOME)/.zshrc
 	ln -s $(CURDIR)/zshenv            $(HOME)/.zshenv
 	ln -s $(CURDIR)/twisty.zsh-theme  $(HOME)/.oh-my-zsh/themes/twisty.zsh-theme
-	ln -s $(CURDIR)/vimrc             $(HOME)/.vimrc
-	ln -s $(CURDIR)/vimrc             $(HOME)/.config/nvim/init.vim
 	ln -s $(CURDIR)/gruvbox.dircolors $(HOME)/.dircolors
 
 uninstall:
@@ -21,8 +18,6 @@ uninstall:
 	rm -f $(HOME)/.zshrc
 	rm -f $(HOME)/.zshenv
 	rm -f $(HOME)/.oh-my-zsh/themes/twisty.zsh-theme
-	rm -f $(HOME)/.vimrc
-	rm -f $(HOME)/.config/nvim/init.vim
 	rm -f $(HOME)/.dircolors
 
 defaults:
