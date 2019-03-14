@@ -8,7 +8,17 @@ EDITOR="/usr/bin/vim"
 
 LC_CTYPE=en_US.UTF-8
 
-# oh-my-zsh configuration.
+##
+# Add `brew` completion.
+# - https://docs.brew.sh/Shell-Completion
+#
+if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+
+##
+# `oh-my-zsh` configuration.
+#
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="twisty"
 plugins=(git osx vi-mode history-substring-search zsh-completions)
@@ -21,7 +31,7 @@ d=.dircolors
 test -r $d && eval "$(dircolors $d)"
 
 ##
-# use 'dirs' to see the stack of past directories
+# use `dirs` to see the stack of past directories
 # use cd ~n to access stack
 #
 setopt auto_pushd
@@ -34,4 +44,21 @@ if [ -f ~/.ssh/known_hosts ] ; then
     zstyle ':completion:*:*:(ssh|scp):*:*' hosts `sed 's/^\([^ ,]*\).*$/\1/' ~/.ssh/known_hosts`
 fi
 
-source $HOME/.bash_aliases
+##
+# Aliases
+#
+[ -f ~/.bash_aliases ] && source ~/.bash_aliases
+
+##
+# Aliases: WSL specific…
+#
+if [[ -d "/mnt/c/Windows" ]] ; then
+    alias code="/mnt/c/Program\ Files/Microsoft\ VS\ Code/bin/code"
+fi
+
+##
+# Fuzzy finder
+# - https://github.com/junegunn/fzf
+#
+export FZF_DEFAULT_OPTS="--preview 'head -100 {}'"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
