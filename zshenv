@@ -1,5 +1,6 @@
 path=(/usr/bin /bin /usr/sbin /sbin)
 path=(/usr/local/bin /usr/local/sbin $path)
+path=(/home/linuxbrew/.linuxbrew/bin /home/linuxbrew/.linuxbrew/sbin $path)
 path=(~/.local/bin $path)
 path=(~/local/bin $path)
 path=(~/Applications $path)
