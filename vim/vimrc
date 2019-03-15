@@ -50,6 +50,8 @@ filetype plugin indent on
 
 syntax enable
 
+set rtp+=/usr/local/opt/fzf
+
 " Enable mouse
 set mouse=a
 

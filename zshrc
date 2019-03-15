@@ -24,9 +24,6 @@ ZSH_THEME="twisty"
 plugins=(git osx vi-mode history-substring-search zsh-completions)
 source $ZSH/oh-my-zsh.sh
 
-autoload -Uz compinit
-compinit
-
 d=.dircolors
 test -r $d && eval "$(dircolors $d)"
 
