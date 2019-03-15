@@ -50,7 +50,8 @@ filetype plugin indent on
 
 syntax enable
 
-set rtp+=/usr/local/opt/fzf
+" FZF (installed by brew or linuxbrew).
+let &rtp .= ','.trim(system('brew --prefix')).'/opt/fzf'
 
 " Enable mouse
 set mouse=a
