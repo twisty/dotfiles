@@ -75,6 +75,7 @@ endif
 let g:gruvbox_bold = 0
 let g:gruvbox_underline = 0
 colorscheme gruvbox
+highlight Visual gui=reverse guifg=#d65d0e guibg=#282828
 
 " Use TextMate-style invisibles.
 set listchars=tab:▸\ ,eol:¬,trail:·
@@ -119,6 +120,7 @@ augroup vimrc_custom_filetypes
   autocmd!
   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
   autocmd BufNewFile,BufRead *.mjml set filetype=xml
+  autocmd BufNewFile,BufRead *.phtml set filetype=php
 augroup END
 
 " Diagraph mappings.
@@ -195,6 +197,9 @@ nmap <Leader>cm :set list number nospell foldcolumn=0<CR>
 
 " n — Toggle relative line numbering.
 nnoremap <Leader>n :set relativenumber!<CR>
+
+" f — Open FZF.
+nnoremap <Leader>f :FZF<CR>
 
 " Use alt key for inc/deincrement numbers because C-a conflict with my Tmux setup.
 nnoremap <A-a> <C-a>
@@ -324,3 +329,14 @@ xmap <C-j> <Plug>(textmanip-move-down)
 xmap <C-k> <Plug>(textmanip-move-up)
 xmap <C-h> <Plug>(textmanip-move-left)
 xmap <C-l> <Plug>(textmanip-move-right)
+
+function! PhpOverride()
+  hi! def link phpDocTags  phpDefine
+  hi! def link phpDocParam phpType
+  setlocal shiftwidth=4
+endfunction
+
+augroup phpOverride
+  autocmd!
+  autocmd FileType php call PhpOverride()
+augroup END
