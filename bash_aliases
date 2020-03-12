@@ -14,8 +14,5 @@ alias did="vim +'normal Go' +'r!date' ~/did.txt"
 #
 if [[ -d "/mnt/c/Windows" ]] ; then
     alias win="/mnt/c/Windows/explorer.exe"
-    if [[ -a ~/source/tmux/tmux-2.7/tmux ]] ; then
-        alias tmux='env TERM=xterm-256color ~/source/tmux/tmux-2.7/tmux'
-        alias tmux-test='env TERM=tmux ~/source/tmux/tmux-2.7/tmux'
-    fi
+    alias tmux-test="env TERM=xterm-256color tmux"
 fi

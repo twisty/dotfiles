@@ -30,6 +30,7 @@ Plugin 'chrisbra/unicode.vim'
 " Language syntaxes
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'leafgarland/typescript-vim'
 Plugin 'lumiliet/vim-twig'
 Plugin 'StanAngeloff/php.vim'
 Plugin 'chr4/nginx.vim'
@@ -153,21 +154,6 @@ function! TwiddleCase(str)
 endfunction
 vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
-" Cursor Tweaks
-" =============
-
-" Use a thin cursor shape when in insert mode.
-" - https://gist.github.com/andyfowler/1195581
-if !has('nvim')
-  if exists('$TMUX')
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-  else
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-  endif
-endif
-
 " Leader commands
 " ===============
 
@@ -207,16 +193,14 @@ nnoremap <A-x> <C-x>
 
 " Copy and paste
 " ==============
-if !has('nvim')
-  " Copy the current text selection to the system clipboard
-  " Note: this doesn’t work at the moment.
-  if has('gui_running')
-    noremap <Leader>y "+y
-  else
-    " Copy to attached terminal using the yank script:
-    " - https://github.com/sunaku/home/blob/master/bin/yank
-    noremap <Leader>y y:call system('~/.vim/osc52-yank.sh', @0)<CR>
-  endif
+function! GetSelectedText()
+  normal gv"xy
+  let result = getreg("x")
+  return result
+endfunction
+if executable("clip.exe")
+  noremap <C-C> :call system('clip.exe', GetSelectedText())<CR>
+  noremap <C-X> :call system('clip.exe', GetSelectedText())<CR>gvx
 endif
 
 " Searching
@@ -312,6 +296,8 @@ endif
 nnoremap <silent> K :NextWordy<CR>
 
 " ALE
+let g:ale_completion_enabled = 1
+
 let g:ale_linters = {}
 let g:ale_linters['javascript'] = ['eslint', 'flow']
 let g:ale_linters['text'] = ['proselint']
