@@ -26,5 +26,5 @@ fi
 # - https://github.com/creationix/nvm/issues/240#issuecomment-18800769
 # Be sure that there is a 'default' version in nvm:
 #     nvm alias default node
-#export NVM_DIR="$HOME/.nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
