@@ -1,4 +1,4 @@
-path=(/usr/bin /bin /usr/sbin /sbin)
+path=(/usr/bin /bin /usr/sbin /sbin $path)
 path=(/usr/local/bin /usr/local/sbin $path)
 path=(/home/linuxbrew/.linuxbrew/bin /home/linuxbrew/.linuxbrew/sbin $path)
 path=(~/.local/bin $path)
@@ -26,5 +26,8 @@ fi
 # - https://github.com/creationix/nvm/issues/240#issuecomment-18800769
 # Be sure that there is a 'default' version in nvm:
 #     nvm alias default node
-#export NVM_DIR="$HOME/.nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+if [[ -d "/mnt/c/Windows" ]] ; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+fi
