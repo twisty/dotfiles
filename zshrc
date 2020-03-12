@@ -59,3 +59,5 @@ fi
 #
 export FZF_DEFAULT_OPTS="--preview 'head -100 {}'"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+umask 002
