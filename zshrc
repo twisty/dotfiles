@@ -50,7 +50,7 @@ fi
 # Aliases: WSL specific…
 #
 if [[ -d "/mnt/c/Windows" ]] ; then
-    alias code="/mnt/c/Program\ Files/Microsoft\ VS\ Code/bin/code"
+    alias code='/mnt/c/Users/tim/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code'
 fi
 
 ##
