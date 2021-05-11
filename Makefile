@@ -1,4 +1,4 @@
-install: uninstall defaults
+install: uninstall
 	ln -s $(CURDIR)/bash_aliases      $(HOME)/.bash_aliases
 	ln -s $(CURDIR)/colordiffrc       $(HOME)/.colordiffrc
 	ln -s $(CURDIR)/editorconfig      $(HOME)/.editorconfig
@@ -29,3 +29,10 @@ defaults:
 	git config --global core.editor vim
 	git config --global credential.helper store
 	git config --global push.default simple
+
+defaults-mac:
+	git config --global credential.helper store
+
+defaults-wsl:
+	git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/libexec/git-core/git-credential-manager.exe"
+
