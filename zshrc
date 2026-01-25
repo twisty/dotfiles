@@ -21,7 +21,7 @@ fi
 #
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="twisty"
-plugins=(git osx vi-mode history-substring-search zsh-completions)
+plugins=(git macos vi-mode history-substring-search zsh-completions)
 source $ZSH/oh-my-zsh.sh
 
 d=.dircolors
@@ -60,4 +60,25 @@ fi
 export FZF_DEFAULT_OPTS="--preview 'head -100 {}'"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+##
+# Switch php
+# - https://dcblog.dev/switching-between-php-versions-with-homebrew
+#
+switchphp() {
+  VERSION="${1:-latest}"
+
+  if [ "$VERSION" = "latest" ]
+  then
+    # set php to latest
+    brew unlink php && brew link --force --overwrite php
+  else
+    # set php to version specified
+    brew unlink php && brew link --force --overwrite php@$1
+  fi
+}
+
 umask 002
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
