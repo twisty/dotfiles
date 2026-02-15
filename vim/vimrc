@@ -1,57 +1,52 @@
-"set shell=zsh\ -l
-set shell=bash
-
-" Vundle...
-" =========
+set shell=zsh\ -l
+"set shell=bash
 
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin()
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'morhetz/gruvbox'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-vinegar'
-Plugin 'sgur/vim-editorconfig'
-Plugin 'tpope/vim-commentary'
-Plugin 'reedes/vim-wordy'
-Plugin 'nelstrom/vim-markdown-folding'
-Plugin 'w0rp/ale'
-"Plugin 'ludovicchabant/vim-gutentags'
-Plugin 't9md/vim-textmanip'
-Plugin 'chrisbra/unicode.vim'
+Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-commentary'
+Plug 'reedes/vim-wordy'
+Plug 'nelstrom/vim-markdown-folding'
+Plug 'w0rp/ale'
+"Plug 'ludovicchabant/vim-gutentags'
+Plug 't9md/vim-textmanip'
+Plug 'chrisbra/unicode.vim'
 
 " Language syntaxes
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'lumiliet/vim-twig'
-Plugin 'StanAngeloff/php.vim'
-Plugin 'chr4/nginx.vim'
-Plugin 'jeroenbourgois/vim-actionscript'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'lumiliet/vim-twig'
+Plug 'StanAngeloff/php.vim'
+Plug 'chr4/nginx.vim'
+Plug 'jeroenbourgois/vim-actionscript'
+Plug 'jwalton512/vim-blade'
 
 " <Leader>ig
-Plugin 'nathanaelkane/vim-indent-guides'
+Plug 'nathanaelkane/vim-indent-guides'
 
 if !has('nvim')
-  Plugin 'tpope/vim-sensible'
-  Plugin 'ConradIrwin/vim-bracketed-paste'
+  Plug 'tpope/vim-sensible'
+  Plug 'ConradIrwin/vim-bracketed-paste'
 endif
 
-call vundle#end()
-filetype plugin indent on
+call plug#end()
 
-" ...end Vundle
-
-syntax enable
-
+" Strip whitespace
+" - https://stackoverflow.com/a/4479072
+function! Strip(input_string)
+  return substitute(a:input_string, '^\s*\(.\{-}\)\s*$', '\1', '')
+endfunction
+"
 " FZF (installed by brew or linuxbrew).
-let &rtp .= ','.trim(system('brew --prefix')).'/opt/fzf'
+let &rtp .= ','.Strip(system('brew --prefix')).'/opt/fzf'
 
 " Enable mouse
 set mouse=a

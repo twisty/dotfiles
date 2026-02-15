@@ -21,11 +21,24 @@ fi
 #
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="twisty"
-plugins=(git osx vi-mode history-substring-search zsh-completions)
+plugins=(
+  git
+  git-flow
+  history-substring-search
+  npm
+  macos
+  vi-mode
+  yarn
+  zsh-completions
+)
 source $ZSH/oh-my-zsh.sh
 
-d=.dircolors
-test -r $d && eval "$(dircolors $d)"
+export BAT_THEME="gruvbox-dark"
+
+if (( $+commands[dircolors] )) ; then
+    d=.dircolors
+    test -r $d && eval "$(dircolors $d)"
+fi
 
 ##
 # use `dirs` to see the stack of past directories
@@ -47,15 +60,19 @@ fi
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 
 ##
-# Aliases: WSL specific…
-#
-if [[ -d "/mnt/c/Windows" ]] ; then
-    alias code="/mnt/c/Program\ Files/Microsoft\ VS\ Code/bin/code"
-fi
-
-##
 # Fuzzy finder
 # - https://github.com/junegunn/fzf
 #
 export FZF_DEFAULT_OPTS="--preview 'head -100 {}'"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+###
+## Re-init nvm
+##
+#[ -d ~/.nvm ] && nvm use default
+
+##
+# Azure CLI
+#
+source $(brew --prefix)/etc/bash_completion.d/az
+

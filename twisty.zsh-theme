@@ -7,7 +7,8 @@
 #}
 #setopt PROMPT_SUBST
 local ret_status="%(?:%{$fg_bold[green]%}► :%{$fg_bold[red]%}► %s)"
-PROMPT='${ret_status}%{$fg[green]%}%T %{$fg[cyan]%}%m %{$fg[yellow]%}%3~ $(git_prompt_info)%{$reset_color%}'
+NEWLINE=$'\n'
+PROMPT='%{$reset_color%}%{$fg[green]%}%T %{$fg[cyan]%}%m %{$fg[yellow]%}%3~ $(git_prompt_info)${NEWLINE}${ret_status}%{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[cyan]%}±(%{$fg[cyan]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
