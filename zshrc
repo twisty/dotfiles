@@ -60,6 +60,13 @@ fi
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 
 ##
+# Aliases: WSL specific…
+#
+if [[ -d "/mnt/c/Windows" ]] ; then
+    alias code='/mnt/c/Users/tim/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code'
+fi
+
+##
 # Fuzzy finder
 # - https://github.com/junegunn/fzf
 #
@@ -76,3 +83,25 @@ export FZF_DEFAULT_OPTS="--preview 'head -100 {}'"
 #
 source $(brew --prefix)/etc/bash_completion.d/az
 
+##
+# Switch php
+# - https://dcblog.dev/switching-between-php-versions-with-homebrew
+#
+switchphp() {
+  VERSION="${1:-latest}"
+
+  if [ "$VERSION" = "latest" ]
+  then
+    # set php to latest
+    brew unlink php && brew link --force --overwrite php
+  else
+    # set php to version specified
+    brew unlink php && brew link --force --overwrite php@$1
+  fi
+}
+
+umask 002
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

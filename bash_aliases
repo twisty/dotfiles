@@ -34,4 +34,5 @@ if [[ -d "/mnt/c/Windows" ]] ; then
     if [[ -d "/mnt/c/Program\ Files/Microsoft\ VS\ Code" ]] ; then
         alias code="/mnt/c/Program\ Files/Microsoft\ VS\ Code/bin/code"
     fi
+    alias tmux-test="env TERM=xterm-256color tmux"
 fi
